@@ -2,6 +2,7 @@ package inferno.saigo.client;
 
 import inferno.saigo.client.assets.ImageUtils;
 import inferno.saigo.client.rendering.Renderable;
+import inferno.saigo.client.rendering.RenderableText;
 import inferno.saigo.client.rendering.RenderableTile;
 import inferno.saigo.client.rendering.Renderer;
 import inferno.saigo.common.tiles.Tile;
@@ -19,7 +20,7 @@ public class Main {
     static Renderer renderer;
 
     static final long NANOSECOND        = 1000000000;
-    static final double OPTIMAL_TICKS   = 100.0;
+    static final double OPTIMAL_TICKS   = 50.0;
     static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
 
     static long lastLoopTime = System.nanoTime();
@@ -37,7 +38,7 @@ public class Main {
         display = new Display("Test");
         renderer = new Renderer();
 
-        renderer.gridspaceX = map[0].length;
+        renderer.gridspaceX = map[0].length-1;
 
         renderableHashMap.put(0, new RenderableTile(new Tile("wall")));
         renderableHashMap.put(1, new RenderableTile(new Tile("tile")));
@@ -51,11 +52,18 @@ public class Main {
         renderableHashMap1.put(3, new RenderableTile(new Tile("ruin3")));
         renderableHashMap1.put(4, new RenderableTile(new Tile("ruin4")));
 
-        for (int[] ints : map) { // y
+
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                renderer.add(0, new RenderableText(x+","+y));;
+            }
+        }
+
+        /*for (int[] ints : map) { // y
             for (int anInt : ints) { // x
                 renderer.add(0, renderableHashMap.get(anInt));
             }
-        }
+        }*/
 
         while (running){
             currentTime = System.nanoTime ();
@@ -105,27 +113,27 @@ public class Main {
 
     static void update() {
         renderer.clear();
-        for (int y = 0; y < map.length; y++) {
+        /*for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 renderer.add(0, renderableHashMap.get(map[y][x]));
 
                 map[y][x] = map[y][x] + new Random().nextInt(1);
                 if (map[y][x] == 5) map[y][x] = 0;
             }
+        }*/
+
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                renderer.add(0, new RenderableText(x+","+y));;
+            }
         }
 
         if (!(renderer.camera.getX() >  map[0].length - 5)) {
 
-            renderer.camera.update(0.01f, 0);
+            renderer.camera.update(0.025f, 0);
         }
         if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0, 0.01f);
-        }
-
-        for (int y = 0; y < 6; y++) {
-            for (int x = 0; x < 6; x++) {
-                //renderer.add(1, renderableHashMap1.get(map[y][x]));
-            }
+            renderer.camera.update(0, 0.025f);
         }
     }
 }
