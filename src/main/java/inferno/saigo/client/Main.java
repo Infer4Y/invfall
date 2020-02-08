@@ -119,26 +119,22 @@ public class Main {
 
     static void update() {
         renderer.clear();
-        /*for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, renderableHashMap.get(map[y][x]));
-
-                map[y][x] = map[y][x] + new Random().nextInt(1);
-                if (map[y][x] == 5) map[y][x] = 0;
-            }
-        }*/
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 renderer.add(0, new RenderableText(String.valueOf(x+y)));;
             }
         }
-        if (true) return;
+
         if (!(renderer.camera.getX() >  map[0].length - 5)) {
-            renderer.camera.update(0.25f, 0);
+            renderer.camera.update(0.025f, 0);
+        } else {
+            renderer.camera.moveTo(0, renderer.camera.getY());
         }
         if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0, 0.25f);
+            renderer.camera.update(0, 0.025f);
+        } else {
+            renderer.camera.moveTo(renderer.camera.getX(), 0);
         }
     }
 }

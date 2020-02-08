@@ -13,6 +13,11 @@ public class Camera {
         this.y += y;
     }
 
+    public void moveTo(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
     public float getX() {
         return x;
     }
