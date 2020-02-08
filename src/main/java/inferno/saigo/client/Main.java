@@ -1,5 +1,6 @@
 package inferno.saigo.client;
 
+import inferno.saigo.client.assets.ImageUtils;
 import inferno.saigo.client.rendering.Renderable;
 import inferno.saigo.client.rendering.RenderableTile;
 import inferno.saigo.client.rendering.Renderer;
@@ -7,6 +8,7 @@ import inferno.saigo.common.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
@@ -17,7 +19,7 @@ public class Main {
     static Renderer renderer;
 
     static final long NANOSECOND        = 1000000000;
-    static final double OPTIMAL_TICKS   = 30.0;
+    static final double OPTIMAL_TICKS   = 100.0;
     static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
 
     static long lastLoopTime = System.nanoTime();
@@ -81,16 +83,27 @@ public class Main {
             bs = display.getCanvas().getBufferStrategy();
         }
 
-        Graphics g = display.getCanvas().getBufferStrategy().getDrawGraphics();
+        BufferedImage view = new BufferedImage(400,400, BufferedImage.TYPE_4BYTE_ABGR);
+
+        Graphics g = view.createGraphics();
         g.setColor(Color.BLACK);
-        g.fillRect(0,0, display.getWidth(), display.getHeight());
+        g.fillRect(0,0, view.getWidth(), view.getHeight());
         g.setColor(Color.WHITE);
         renderer.render(g);
         g.dispose();
+
+        Graphics g1 = display.getCanvas().getBufferStrategy().getDrawGraphics();
+
+        g1.setColor(Color.BLACK);
+        g1.fillRect(0,0, display.getCanvas().getWidth(), display.getCanvas().getHeight());
+        g1.setColor(Color.WHITE);
+
+        ImageUtils.drawScaledImage(ImageUtils.resize(view, display.getCanvas().getWidth(), display.getCanvas().getHeight()), display.getCanvas(), g1);
+
         bs.show();
     }
 
-    static void update() throws IOException {
+    static void update() {
         renderer.clear();
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
@@ -101,7 +114,13 @@ public class Main {
             }
         }
 
-        renderer.camera.update(.01f,0.01f);
+        if (!(renderer.camera.getX() >  map[0].length - 5)) {
+
+            renderer.camera.update(0.01f, 0);
+        }
+        if (!(renderer.camera.getY() >  map.length - 5)) {
+            renderer.camera.update(0, 0.01f);
+        }
 
         for (int y = 0; y < 6; y++) {
             for (int x = 0; x < 6; x++) {

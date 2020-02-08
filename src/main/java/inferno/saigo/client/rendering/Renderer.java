@@ -22,8 +22,8 @@ public class Renderer {
     public void render(Graphics g){
         for (int i = 0; i < 3; i++) {
             for (Renderable r : renderlist.get(i)) {
-                if ( x > camera.getX() - 10 && x < camera.getX() + 10 &&
-                     y > camera.getY() - 10 && y < camera.getY() + 10) {
+                if ( x > camera.getX() - 12 && x < camera.getX() + 12 &&
+                     y > camera.getY() - 12 && y < camera.getY() + 12) {
 
                     g.translate((int)(-camera.getX() * 64), (int)(-camera.getY() * 64));
                     g.translate(x * 64, y * 64);
