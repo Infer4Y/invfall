@@ -17,6 +17,12 @@ public class Display extends JFrame {
         this.setVisible(true);
     }
 
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        canvas.resize(this.rootPane.getSize());
+    }
+
     public Canvas getCanvas() {
         return canvas;
     }

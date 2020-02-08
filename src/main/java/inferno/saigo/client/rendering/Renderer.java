@@ -8,7 +8,9 @@ public class Renderer {
     // Int : Layer = 3
     private HashMap<Integer, LinkedList<Renderable>> renderlist = new HashMap<>();
 
-    int gridspace = 5;
+    public Camera camera = new Camera(0,0);
+
+    public int gridspaceX = 5;
     int x = 0, y = 0;
 
     public Renderer() {
@@ -20,11 +22,17 @@ public class Renderer {
     public void render(Graphics g){
         for (int i = 0; i < 3; i++) {
             for (Renderable r : renderlist.get(i)) {
-                g.translate(x*64, y*64);
-                r.render(g);
-                g.translate(-x*64, -y*64);
+                if ( x > camera.getX() - 10 && x < camera.getX() + 10 &&
+                     y > camera.getY() - 10 && y < camera.getY() + 10) {
 
-                if (x == gridspace){
+                    g.translate((int)(-camera.getX() * 64), (int)(-camera.getY() * 64));
+                    g.translate(x * 64, y * 64);
+                    r.render(g);
+                    g.translate(-x * 64, -y * 64);
+                    g.translate((int)(camera.getX() * 64), (int)(camera.getY() * 64));
+                }
+
+                if (x == gridspaceX){
                     x = 0;
                     y ++;
                 } else {
