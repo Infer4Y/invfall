@@ -55,7 +55,7 @@ public class ImageUtils {
         int w = (int) (img.getWidth() * scale);
         int h = (int) (img.getHeight() * scale);
 
-        Image tmp = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+        Image tmp = img.getScaledInstance(w, h, Image.SCALE_FAST);
 
         BufferedImage resized = new BufferedImage(w, h, img.getType());
         Graphics2D g2d = resized.createGraphics();

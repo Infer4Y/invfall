@@ -18,4 +18,14 @@ public class RenderableText extends Renderable {
         g.setColor(Color.WHITE);
         g.drawString(text,5,15);
     }
+
+    @Override
+    public void render(Graphics g, int tileSize) {
+        g.setColor(new Color((int) text.charAt(0)+(int) text.charAt(1) + (int) text.charAt(2)));
+        g.fillRect(0,0, tileSize, tileSize);
+        g.setColor(Color.BLACK);
+        g.drawRect(0,0, tileSize, tileSize);
+        g.setColor(Color.WHITE);
+        g.drawString(text,4,16);
+    }
 }

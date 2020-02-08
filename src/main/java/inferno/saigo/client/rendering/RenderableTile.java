@@ -22,4 +22,9 @@ public class RenderableTile extends Renderable {
     public void render(Graphics g) {
         g.drawImage(texture.getImage(),0,0,64,64,null);
     }
+
+    @Override
+    public void render(Graphics g, int tileSize) {
+        g.drawImage(texture.getImage(),0,0,tileSize,tileSize,null);
+    }
 }

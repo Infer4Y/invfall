@@ -14,6 +14,7 @@ public class Display extends JFrame {
         canvas.setSize(64*6,64*6);
         pack();
         this.setDefaultCloseOperation(3);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

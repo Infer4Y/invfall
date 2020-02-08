@@ -20,8 +20,10 @@ public class Main {
     static Renderer renderer;
 
     static final long NANOSECOND        = 1000000000;
-    static final double OPTIMAL_TICKS   = 50.0;
+    static final double OPTIMAL_TICKS   = 10.0;
     static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
+
+    static int FPS;
 
     static long lastLoopTime = System.nanoTime();
     static long currentTime;
@@ -32,13 +34,14 @@ public class Main {
     static HashMap<Integer, Renderable> renderableHashMap1 = new HashMap<>();
     static BufferStrategy bs = null;
 
-    static int map[][] = new int[30][70];
+    static int map[][] = new int[300][300];
 
     public static void main(String[] args) throws IOException {
         display = new Display("Test");
         renderer = new Renderer();
 
         renderer.gridspaceX = map[0].length-1;
+        renderer.tileSize = 32;
 
         renderableHashMap.put(0, new RenderableTile(new Tile("wall")));
         renderableHashMap.put(1, new RenderableTile(new Tile("tile")));
@@ -55,7 +58,7 @@ public class Main {
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new RenderableText(x+","+y));;
+                renderer.add(0, new RenderableText(String.valueOf(x+y)));;
             }
         }
 
@@ -79,19 +82,21 @@ public class Main {
 
             if (System.currentTimeMillis () - secondTimer > 1000) {
                 secondTimer += 1000;
+                System.out.print (FPS+"\n");
+                FPS = 0;
             }
 
         }
 
     }
 
+    static BufferedImage view = new BufferedImage(64*6,64*6, BufferedImage.TYPE_4BYTE_ABGR);
+
     static void render() {
         if ( bs == null) {
             display.getCanvas().createBufferStrategy(4);
             bs = display.getCanvas().getBufferStrategy();
         }
-
-        BufferedImage view = new BufferedImage(400,400, BufferedImage.TYPE_4BYTE_ABGR);
 
         Graphics g = view.createGraphics();
         g.setColor(Color.BLACK);
@@ -109,6 +114,7 @@ public class Main {
         ImageUtils.drawScaledImage(ImageUtils.resize(view, display.getCanvas().getWidth(), display.getCanvas().getHeight()), display.getCanvas(), g1);
 
         bs.show();
+        FPS++;
     }
 
     static void update() {
@@ -124,16 +130,15 @@ public class Main {
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new RenderableText(x+","+y));;
+                renderer.add(0, new RenderableText(String.valueOf(x+y)));;
             }
         }
-
+        if (true) return;
         if (!(renderer.camera.getX() >  map[0].length - 5)) {
-
-            renderer.camera.update(0.025f, 0);
+            renderer.camera.update(0.25f, 0);
         }
         if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0, 0.025f);
+            renderer.camera.update(0, 0.25f);
         }
     }
 }
