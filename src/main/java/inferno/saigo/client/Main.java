@@ -34,7 +34,7 @@ public class Main {
     static HashMap<Integer, Renderable> renderableHashMap1 = new HashMap<>();
     static BufferStrategy bs = null;
 
-    static int map[][] = new int[300][300];
+    static int map[][] = new int[200][200];
 
     public static void main(String[] args) throws IOException {
         display = new Display("Test");
@@ -118,21 +118,13 @@ public class Main {
     }
 
     static void update() {
-        renderer.clear();
-
-        for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new RenderableText(String.valueOf(x+y)));;
-            }
-        }
-
         if (!(renderer.camera.getX() >  map[0].length - 5)) {
-            renderer.camera.update(0.025f, 0);
+            renderer.camera.update(0.05f, 0);
         } else {
             renderer.camera.moveTo(0, renderer.camera.getY());
         }
         if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0, 0.025f);
+            renderer.camera.update(0, 0.05f);
         } else {
             renderer.camera.moveTo(renderer.camera.getX(), 0);
         }
