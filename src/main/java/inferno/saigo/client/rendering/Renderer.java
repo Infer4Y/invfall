@@ -12,7 +12,6 @@ public class Renderer {
 
     public int gridspaceX = 5;
     public int tileSize = 16;
-    int x = 0, y = 0;
 
     public Renderer() {
         renderlist.put(0, new LinkedList<Renderable>());
@@ -23,24 +22,20 @@ public class Renderer {
     public void render(Graphics g){
         for (int i = 0; i < 3; i++) {
             for (Renderable r : renderlist.get(i)) {
-                if ( x > camera.getX() - 12 && x < camera.getX() + 12 &&
-                     y > camera.getY() - 12 && y < camera.getY() + 12) {
+                if (r instanceof RenderableCoord) {
+                    if (((RenderableCoord) r).getX() > camera.getX() - 12 && ((RenderableCoord) r).getX() < camera.getX() + 12 &&
+                            ((RenderableCoord) r).getY() > camera.getY() - 12 && ((RenderableCoord) r).getY() < camera.getY() + 12) {
 
-                    g.translate((int)(-camera.getX() * tileSize), (int)(-camera.getY() * tileSize));
-                    g.translate(x * tileSize, y * tileSize);
-                    r.render(g, tileSize);
-                    g.translate(-x * tileSize, -y * tileSize);
-                    g.translate((int)(camera.getX() * tileSize), (int)(camera.getY() * tileSize));
-                }
-
-                if (x == gridspaceX){
-                    x = 0;
-                    y ++;
+                        g.translate((int) (-camera.getX() * tileSize), (int) (-camera.getY() * tileSize));
+                        r.render(g, tileSize);
+                        g.translate((int) (camera.getX() * tileSize), (int) (camera.getY() * tileSize));
+                    }
                 } else {
-                    x++;
+                    g.translate((int) (-camera.getX() * tileSize), (int) (-camera.getY() * tileSize));
+                    r.render(g, tileSize);
+                    g.translate((int) (camera.getX() * tileSize), (int) (camera.getY() * tileSize));
                 }
             }
-            x = y = 0;
         }
     }
 

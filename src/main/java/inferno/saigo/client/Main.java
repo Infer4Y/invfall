@@ -30,8 +30,6 @@ public class Main {
     static double deltaTime;
     static long secondTimer = System.currentTimeMillis();
 
-    static HashMap<Integer, Renderable> renderableHashMap = new HashMap<>();
-    static HashMap<Integer, Renderable> renderableHashMap1 = new HashMap<>();
     static BufferStrategy bs = null;
 
     static int map[][] = new int[200][200];
@@ -43,30 +41,11 @@ public class Main {
         renderer.gridspaceX = map[0].length-1;
         renderer.tileSize = 32;
 
-        renderableHashMap.put(0, new RenderableTile(new Tile("wall")));
-        renderableHashMap.put(1, new RenderableTile(new Tile("tile")));
-        renderableHashMap.put(2, new RenderableTile(new Tile("brick")));
-        renderableHashMap.put(3, new RenderableTile(new Tile("black_tile")));
-        renderableHashMap.put(4, new RenderableTile(new Tile("diag_brick")));
-
-        renderableHashMap1.put(0, new RenderableTile(new Tile("ruin")));
-        renderableHashMap1.put(1, new RenderableTile(new Tile("ruin1")));
-        renderableHashMap1.put(2, new RenderableTile(new Tile("ruin2")));
-        renderableHashMap1.put(3, new RenderableTile(new Tile("ruin3")));
-        renderableHashMap1.put(4, new RenderableTile(new Tile("ruin4")));
-
-
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new RenderableText(String.valueOf(x+y)));;
+                renderer.add(0, new RenderableText(String.valueOf(x+y),x,y));;
             }
         }
-
-        /*for (int[] ints : map) { // y
-            for (int anInt : ints) { // x
-                renderer.add(0, renderableHashMap.get(anInt));
-            }
-        }*/
 
         while (running){
             currentTime = System.nanoTime ();
@@ -85,9 +64,7 @@ public class Main {
                 System.out.print (FPS+"\n");
                 FPS = 0;
             }
-
         }
-
     }
 
     static BufferedImage view = new BufferedImage(64*6,64*6, BufferedImage.TYPE_4BYTE_ABGR);
@@ -119,12 +96,12 @@ public class Main {
 
     static void update() {
         if (!(renderer.camera.getX() >  map[0].length - 5)) {
-            renderer.camera.update(0.05f, 0);
+            renderer.camera.update(.75f, 0);
         } else {
             renderer.camera.moveTo(0, renderer.camera.getY());
         }
         if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0, 0.05f);
+            renderer.camera.update(0,  (1f / (float) (OPTIMAL_TICKS*4)));
         } else {
             renderer.camera.moveTo(renderer.camera.getX(), 0);
         }
