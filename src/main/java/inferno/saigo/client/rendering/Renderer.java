@@ -10,12 +10,17 @@ public class Renderer {
 
     public Camera camera = new Camera(150,150);
 
+
     public int gridSpaceX = 5;
+    //This is the size per tile in pixels. One length is equivalent in pixel
     public int tileSize = 16;
 
     public Renderer() {
+        //Background Layer
         renderlist.put(0, new LinkedList<>());
+        //Wall/Player Layer
         renderlist.put(1, new LinkedList<>());
+        //Foreground Layer
         renderlist.put(2, new LinkedList<>());
     }
 
