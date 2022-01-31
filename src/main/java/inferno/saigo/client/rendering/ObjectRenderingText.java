@@ -3,11 +3,11 @@ package inferno.saigo.client.rendering;
 import java.awt.*;
 import java.util.Random;
 
-public class RenderableText extends RenderableCoord {
-    private String text;
-    private Color color;
+public class ObjectRenderingText extends ObjectRenderingCoord {
+    private final String text;
+    private final Color color;
 
-    public RenderableText(String text, int x, int y){
+    public ObjectRenderingText(String text, int x, int y){
         super(x,y);
         this.text = text;
         this.color = new Color(new Random().nextInt(255*255*255));

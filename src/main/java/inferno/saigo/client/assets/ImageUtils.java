@@ -17,8 +17,8 @@ public class ImageUtils {
 
         int x1 = 0; // top left X position
         int y1 = 0; // top left Y position
-        int x2 = 0; // bottom right X position
-        int y2 = 0; // bottom right Y position
+        int x2;     // bottom right X position
+        int y2;     // bottom right Y position
 
         if (imgWidth < canvasWidth && imgHeight < canvasHeight) {
             // the image is smaller than the canvas
@@ -55,7 +55,7 @@ public class ImageUtils {
         int w = (int) (img.getWidth() * scale);
         int h = (int) (img.getHeight() * scale);
 
-        Image tmp = img.getScaledInstance(w, h, Image.SCALE_FAST);
+        Image tmp = img.getScaledInstance(w, h, Image.SCALE_DEFAULT);
 
         BufferedImage resized = new BufferedImage(w, h, img.getType());
         Graphics2D g2d = resized.createGraphics();

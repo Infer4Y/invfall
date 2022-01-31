@@ -5,15 +5,12 @@ import inferno.saigo.client.assets.Textures;
 import inferno.saigo.common.tiles.Tile;
 
 import java.awt.*;
-import java.io.IOException;
 
-public class RenderableTile extends RenderableCoord {
-    private Texture texture;
-    private Tile tile;
+public class ObjectRenderingTile extends ObjectRenderingCoord {
+    private final Texture texture;
 
-    public RenderableTile(Tile tile, int x, int y) throws IOException {
+    public ObjectRenderingTile(Tile tile, int x, int y) {
         super(x, y);
-        this.tile = tile;
         this.texture = Textures.getTexture(tile.getName()).getFirst();
     }
 

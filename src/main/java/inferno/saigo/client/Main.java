@@ -1,18 +1,12 @@
 package inferno.saigo.client;
 
 import inferno.saigo.client.assets.ImageUtils;
-import inferno.saigo.client.rendering.Renderable;
-import inferno.saigo.client.rendering.RenderableText;
-import inferno.saigo.client.rendering.RenderableTile;
+import inferno.saigo.client.rendering.ObjectRenderingText;
 import inferno.saigo.client.rendering.Renderer;
-import inferno.saigo.common.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Random;
 
 public class Main {
     static boolean running = true;
@@ -32,18 +26,18 @@ public class Main {
 
     static BufferStrategy bs = null;
 
-    static int map[][] = new int[200][200];
+    static int[][] map = new int[200][200];
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         display = new Display("Test");
         renderer = new Renderer();
 
-        renderer.gridspaceX = map[0].length-1;
+        renderer.gridSpaceX = map[0].length-1;
         renderer.tileSize = 32;
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new RenderableText(String.valueOf(x+y),x,y));;
+                renderer.add(0, new ObjectRenderingText(String.valueOf(x+y),x,y));
             }
         }
 
