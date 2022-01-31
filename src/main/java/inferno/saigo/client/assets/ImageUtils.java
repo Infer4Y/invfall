@@ -1,67 +1,74 @@
 package inferno.saigo.client.assets;
 
+import inferno.saigo.client.utils.display.DisplayReference;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ImageUtils {
-    public static void drawScaledImage(Image image, Component canvas, Graphics g) {
-        int imgWidth = image.getWidth(null);
-        int imgHeight = image.getHeight(null);
+    public static void drawScaledImage(Image image, Component canvas, Graphics graphics) {
+        int image_width = image.getWidth(null);
+        int image_height = image.getHeight(null);
 
-        double imgAspect = (double) imgHeight / imgWidth;
+        double image_aspect = (double) image_height / image_width;
 
-        int canvasWidth = canvas.getWidth();
-        int canvasHeight = canvas.getHeight();
+        int canvas_width = canvas.getWidth();
+        int canvas_height = canvas.getHeight();
 
-        double canvasAspect = (double) canvasHeight / canvasWidth;
+        double canvas_aspect = (double) canvas_height / canvas_width;
 
         int x1 = 0; // top left X position
         int y1 = 0; // top left Y position
         int x2;     // bottom right X position
         int y2;     // bottom right Y position
 
-        if (imgWidth < canvasWidth && imgHeight < canvasHeight) {
+        if (image_width < canvas_width && image_height < canvas_height) {
             // the image is smaller than the canvas
-            x1 = (canvasWidth - imgWidth)  / 2;
-            y1 = (canvasHeight - imgHeight) / 2;
-            x2 = imgWidth + x1;
-            y2 = imgHeight + y1;
+            x1 = (canvas_width - image_width)  / 2;
+            y1 = (canvas_height - image_height) / 2;
+            x2 = image_width + x1;
+            y2 = image_height + y1;
 
         } else {
-            if (canvasAspect > imgAspect) {
-                y1 = canvasHeight;
+            if (canvas_aspect > image_aspect) {
+                y1 = canvas_height;
                 // keep image aspect ratio
-                canvasHeight = (int) (canvasWidth * imgAspect);
-                y1 = (y1 - canvasHeight) / 2;
+                canvas_height = (int) (canvas_width * image_aspect);
+                y1 = (y1 - canvas_height) / 2;
             } else {
-                x1 = canvasWidth;
+                x1 = canvas_width;
                 // keep image aspect ratio
-                canvasWidth = (int) (canvasHeight / imgAspect);
-                x1 = (x1 - canvasWidth) / 2;
+                canvas_width = (int) (canvas_height / image_aspect);
+                x1 = (x1 - canvas_width) / 2;
             }
-            x2 = canvasWidth + x1;
-            y2 = canvasHeight + y1;
+            x2 = canvas_width + x1;
+            y2 = canvas_height + y1;
         }
 
-        g.drawImage(image, x1, y1, x2, y2, 0, 0, imgWidth, imgHeight, null);
+        graphics.drawImage(image, x1, y1, x2, y2, 0, 0, image_width, image_height, null);
     }
 
-    public static BufferedImage resize(BufferedImage img, int width, int height) {
+    public static BufferedImage resize(BufferedImage buffered_image, int target_width, int target_height) {
 
-        double scalex = (double) width / img.getWidth();
-        double scaley = (double) height / img.getHeight();
-        double scale = Math.min(scalex, scaley);
+        double scale_x = (double) target_width / buffered_image.getWidth();
+        double scale_y = (double) target_height / buffered_image.getHeight();
+        double scale = Math.min(scale_x, scale_y);
 
-        int w = (int) (img.getWidth() * scale);
-        int h = (int) (img.getHeight() * scale);
+        int image_width = (int) (buffered_image.getWidth() * scale);
+        int image_height = (int) (buffered_image.getHeight() * scale);
 
-        Image tmp = img.getScaledInstance(w, h, Image.SCALE_DEFAULT);
+        Image temporary_scaled_instance = buffered_image.getScaledInstance(image_width, image_height, Image.SCALE_DEFAULT);
 
-        BufferedImage resized = new BufferedImage(w, h, img.getType());
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
+        //BufferedImage resized_buffered_image = new BufferedImage(image_width, image_height, buffered_image.getType());
+        BufferedImage resized_buffered_image = DisplayReference.defaultConfiguration.createCompatibleImage(image_width, image_height, Transparency.TRANSLUCENT);
+        resized_buffered_image.setAccelerationPriority(1);
 
-        return resized;
+        Graphics2D graphics2D = resized_buffered_image.createGraphics();
+        graphics2D.drawImage(temporary_scaled_instance, 0, 0, null);
+        graphics2D.dispose();
+
+        temporary_scaled_instance.flush();
+
+        return resized_buffered_image;
     }
 }

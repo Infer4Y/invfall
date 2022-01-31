@@ -1,103 +1,44 @@
 package inferno.saigo.client;
 
-import inferno.saigo.client.assets.ImageUtils;
 import inferno.saigo.client.rendering.ObjectRenderingText;
 import inferno.saigo.client.rendering.Renderer;
+import inferno.saigo.client.threading.CommonThread;
+import inferno.saigo.client.threading.DisplayThread;
+import inferno.saigo.client.utils.display.DisplayReference;
 
 import java.awt.*;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
-public class Main {
-    static boolean running = true;
-    static Display display;
-    static Renderer renderer;
-
-    static final long NANOSECOND        = 1000000000;
-    static final double OPTIMAL_TICKS   = 10.0;
-    static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
-
-    static int FPS;
-
-    static long lastLoopTime = System.nanoTime();
-    static long currentTime;
-    static double deltaTime;
-    static long secondTimer = System.currentTimeMillis();
-
-    static BufferStrategy bs = null;
-
-    static int[][] map = new int[200][200];
+public class Main implements Runnable{
+    public static int[][] map = new int[200][200];
 
     public static void main(String[] args) {
-        display = new Display("Test");
-        renderer = new Renderer();
+        new Main().run();
+    }
 
-        renderer.gridSpaceX = map[0].length-1;
-        renderer.tileSize = 32;
+    @Override
+    public void run() {
+        DisplayReference.display = new Display("Test");
+        DisplayReference.renderer = new Renderer();
 
+        DisplayReference.view.setAccelerationPriority(1);
+
+        DisplayReference.renderer.gridSpaceX = map[0].length-1;
+        DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/6;
+
+        DisplayReference.view = DisplayReference.defaultConfiguration.createCompatibleImage(
+                DisplayReference.view.getWidth(),
+                DisplayReference.view.getHeight(),
+                Transparency.TRANSLUCENT);
+
+
+        int tile_id = 0;
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
-                renderer.add(0, new ObjectRenderingText(String.valueOf(x+y),x,y));
+                DisplayReference.renderer.add(0, new ObjectRenderingText(String.valueOf(tile_id),x,y));
+                tile_id++;
             }
         }
-
-        while (running){
-            currentTime = System.nanoTime ();
-            deltaTime += (currentTime - lastLoopTime) / OPTIMAL_TIME;
-            lastLoopTime = currentTime;
-
-            while (deltaTime >= 1) {
-                update();
-                deltaTime--;
-            }
-
-            render();
-
-            if (System.currentTimeMillis () - secondTimer > 1000) {
-                secondTimer += 1000;
-                System.out.print (FPS+"\n");
-                FPS = 0;
-            }
-        }
-    }
-
-    static BufferedImage view = new BufferedImage(64*6,64*6, BufferedImage.TYPE_4BYTE_ABGR);
-
-    static void render() {
-        if ( bs == null) {
-            display.getCanvas().createBufferStrategy(4);
-            bs = display.getCanvas().getBufferStrategy();
-        }
-
-        Graphics g = view.createGraphics();
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0, view.getWidth(), view.getHeight());
-        g.setColor(Color.WHITE);
-        renderer.render(g);
-        g.dispose();
-
-        Graphics g1 = display.getCanvas().getBufferStrategy().getDrawGraphics();
-
-        g1.setColor(Color.BLACK);
-        g1.fillRect(0,0, display.getCanvas().getWidth(), display.getCanvas().getHeight());
-        g1.setColor(Color.WHITE);
-
-        ImageUtils.drawScaledImage(ImageUtils.resize(view, display.getCanvas().getWidth(), display.getCanvas().getHeight()), display.getCanvas(), g1);
-
-        bs.show();
-        FPS++;
-    }
-
-    static void update() {
-        if (!(renderer.camera.getX() >  map[0].length - 5)) {
-            renderer.camera.update(.75f, 0);
-        } else {
-            renderer.camera.moveTo(0, renderer.camera.getY());
-        }
-        if (!(renderer.camera.getY() >  map.length - 5)) {
-            renderer.camera.update(0,  (1f / (float) (OPTIMAL_TICKS*4)));
-        } else {
-            renderer.camera.moveTo(renderer.camera.getX(), 0);
-        }
+        new DisplayThread(this, "Display0").start();
+        new CommonThread(this, "Common0").start();
     }
 }

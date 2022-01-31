@@ -15,9 +15,9 @@ public class ObjectRenderingTile extends ObjectRenderingCoord {
     }
 
     @Override
-    public void render(Graphics g, int tileSize) {
-        g.translate(getX() * tileSize, getY() * tileSize);
-        g.drawImage(texture.getImage(),getX() * tileSize,getY() * tileSize, tileSize, tileSize,null);
-        g.translate(-getX() * tileSize, -getY() * tileSize);
+    public void render(Graphics graphics, int tileSize) {
+        graphics.translate(getX() * tileSize, getY() * tileSize);
+        graphics.drawImage(texture.getImage(),getX() * tileSize,getY() * tileSize, tileSize, tileSize,null);
+        graphics.translate(-getX() * tileSize, -getY() * tileSize);
     }
 }

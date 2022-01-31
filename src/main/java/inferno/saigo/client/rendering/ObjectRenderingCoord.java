@@ -1,6 +1,6 @@
 package inferno.saigo.client.rendering;
 
-public abstract class ObjectRenderingCoord extends Renderable {
+public abstract class ObjectRenderingCoord extends ObjectRendering {
     private final int x, y;
 
     public ObjectRenderingCoord(int x, int y) {
