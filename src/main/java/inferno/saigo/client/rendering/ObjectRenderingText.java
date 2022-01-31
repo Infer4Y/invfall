@@ -14,14 +14,16 @@ public class ObjectRenderingText extends ObjectRenderingCoord {
     }
 
     @Override
-    public void render(Graphics graphics, int tileSize) {
-        graphics.translate(getX() * tileSize, getY() * tileSize);
+    public void render(Graphics2D graphics, int tileSize) {
+        graphics.translate((int)(getX()) * tileSize - (tileSize >> 1), (int)(getY()) * tileSize - (tileSize >> 1));
         graphics.setColor(color);
         graphics.fillRect(0,0, tileSize, tileSize);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(0,0, tileSize, tileSize);
         graphics.setColor(Color.WHITE);
         graphics.drawString(text,4,16);
-        graphics.translate(-getX() * tileSize, -getY() * tileSize);
+        graphics.setColor(Color.WHITE);
+        graphics.drawRect(tileSize/4,tileSize/4, tileSize-(tileSize/4*2)-1,tileSize-(tileSize/4*2)-1);
+        graphics.translate(-(int)(getX()) * tileSize + (tileSize >> 1), -(int)(getY()) * tileSize + (tileSize >> 1));
     }
 }

@@ -1,15 +1,15 @@
 package inferno.saigo.common.world.chunks;
 
-import inferno.saigo.common.tiles.Tile;
+import inferno.saigo.common.tiles.TileState;
 
 public class Chunk {
-    private Tile[][] tiles = new Tile[16][16];
+    private final TileState[][] tiles = new TileState[16][16];
 
-    public void setTile(Tile tile, int x, int y) {
+    public void setTile(TileState tile, int x, int y) {
         tiles[x][y] = tile;
     }
 
-    public Tile getTile(int x, int y){
+    public TileState getTile(int x, int y){
         return tiles[x][y];
     }
 }

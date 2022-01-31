@@ -25,7 +25,7 @@ public class DisplayReference {
 
     public static BufferStrategy buffer_strategy = null;
 
-    public static BufferedImage view = new BufferedImage(64*12,64*12, BufferedImage.TYPE_4BYTE_ABGR);
+    public static BufferedImage view = new BufferedImage(64*18,64*18, BufferedImage.TYPE_4BYTE_ABGR);
 
     public static GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static GraphicsConfiguration defaultConfiguration = localGraphicsEnvironment.getDefaultScreenDevice().getDefaultConfiguration();

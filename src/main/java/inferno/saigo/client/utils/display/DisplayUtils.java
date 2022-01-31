@@ -7,7 +7,7 @@ import java.awt.*;
 public class DisplayUtils {
     public static void render() {
         if ( DisplayReference.buffer_strategy == null) {
-            DisplayReference.display.getCanvas().createBufferStrategy(4);
+            DisplayReference.display.getCanvas().createBufferStrategy(3);
             DisplayReference.buffer_strategy = DisplayReference.display.getCanvas().getBufferStrategy();
         }
 

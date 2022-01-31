@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Textures {
-    private static HashMap<String, LinkedList<Texture>> TEXTURE_MAP = new HashMap<>();
+    private static final HashMap<String, LinkedList<Texture>> TEXTURE_MAP = new HashMap<>();
 
     public static void registerTexture(Tile tile) throws IOException {
         LinkedList <Texture> temp = new LinkedList<>();
-        temp.add(new Texture(new ResourceLocation(tile.getName())));
+        temp.add(new Texture(new ResourceLocation("textures/tiles/"+tile.getName()+".png")));
         TEXTURE_MAP.put(tile.getName(), temp);
     }
 

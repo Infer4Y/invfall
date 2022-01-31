@@ -6,7 +6,7 @@ import inferno.saigo.client.utils.display.DisplayReference;
 public class ClientUtils {
     public static void update() {
         if (!(DisplayReference.renderer.camera.getX() >  Main.map[0].length - 5)) {
-            DisplayReference.renderer.camera.update((10f / (float) (DisplayReference.OPTIMAL_TICKS)), 0);
+            DisplayReference.renderer.camera.update((1f / (float) (DisplayReference.OPTIMAL_TICKS)), 0);
         } else {
             DisplayReference.renderer.camera.moveTo(0, DisplayReference.renderer.camera.getY());
         }

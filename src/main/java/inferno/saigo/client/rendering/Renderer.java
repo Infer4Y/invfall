@@ -16,6 +16,8 @@ public class Renderer {
     public int gridSpaceX = 5;
     //This is the size per tile in pixels. One length is equivalent in pixel
     public int tileSize = 128;
+    //This is the size per tile in pixels. One length is equivalent in pixel
+    public int tileRenderDistance = 4;
 
     public Renderer() {
         //Background Layer
@@ -29,16 +31,16 @@ public class Renderer {
     public void render(Graphics2D graphics){
         render_object_list_list.values().forEach((object_to_render_list) -> object_to_render_list.forEach(object_to_render -> {
             if (object_to_render instanceof ObjectRenderingCoord) {
-                if (((ObjectRenderingCoord) object_to_render).getX() > camera.getX() - 12
-                        && ((ObjectRenderingCoord) object_to_render).getX() < camera.getX() + 12
-                        && ((ObjectRenderingCoord) object_to_render).getY() > camera.getY() - 12
-                        && ((ObjectRenderingCoord) object_to_render).getY() < camera.getY() + 12) {
+                if (((ObjectRenderingCoord) object_to_render).getX() > camera.getX() - tileRenderDistance
+                        && ((ObjectRenderingCoord) object_to_render).getX() < camera.getX() + tileRenderDistance
+                        && ((ObjectRenderingCoord) object_to_render).getY() > camera.getY() - tileRenderDistance
+                        && ((ObjectRenderingCoord) object_to_render).getY() < camera.getY() + tileRenderDistance) {
 
-                    graphics.translate((int) (-camera.getX() * tileSize),
-                            (int) (-camera.getY() * tileSize));
+                    graphics.translate(Math.round((-camera.getX() * tileSize) + (DisplayReference.view.getWidth() >> 1)),
+                            Math.round((-camera.getY() * tileSize) + (DisplayReference.view.getHeight() >> 1)));
                     object_to_render.render(graphics, tileSize);
-                    graphics.translate((int) (camera.getX() * tileSize),
-                            (int) (camera.getY() * tileSize));
+                    graphics.translate(Math.round((camera.getX() * tileSize) - (DisplayReference.view.getWidth() >> 1)),
+                            Math.round((camera.getY() * tileSize) - (DisplayReference.view.getHeight() >> 1)));
                 }
             } else {
                 graphics.translate((int) (-camera.getX() * tileSize),

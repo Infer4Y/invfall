@@ -3,7 +3,7 @@ package inferno.saigo.common.items;
 import inferno.saigo.common.tiles.Tile;
 
 public class ItemTile extends Item {
-    private Tile reference;
+    private final Tile reference;
 
     public ItemTile(Tile tile) {
         super(tile.getName());

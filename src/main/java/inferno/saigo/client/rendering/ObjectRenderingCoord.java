@@ -1,18 +1,18 @@
 package inferno.saigo.client.rendering;
 
 public abstract class ObjectRenderingCoord extends ObjectRendering {
-    private final int x, y;
+    private final float x, y;
 
-    public ObjectRenderingCoord(int x, int y) {
+    public ObjectRenderingCoord(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 }
