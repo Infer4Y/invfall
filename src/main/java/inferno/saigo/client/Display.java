@@ -11,10 +11,10 @@ import java.io.IOException;
 public class Display extends JFrame {
     private final Canvas canvas = new Canvas();
 
-    public Display(String title) {
+    public Display(String title, int width, int height) {
         super(title);
         this.add(canvas);
-        canvas.setSize(64*6,64*6);
+        canvas.setSize(width,height);
         pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
