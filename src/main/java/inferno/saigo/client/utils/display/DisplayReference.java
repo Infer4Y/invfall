@@ -1,6 +1,5 @@
 package inferno.saigo.client.utils.display;
 
-import inferno.saigo.client.Display;
 import inferno.saigo.client.rendering.Renderer;
 
 import java.awt.*;

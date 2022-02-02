@@ -1,8 +1,11 @@
 package inferno.saigo.client.rendering;
 
+import inferno.saigo.client.assets.Textures;
 import inferno.saigo.client.utils.display.DisplayReference;
+import inferno.saigo.common.init.Tiles;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -26,6 +29,15 @@ public class Renderer {
         render_object_list_list.put(1, new LinkedList<>());
         //Foreground Layer
         render_object_list_list.put(2, new LinkedList<>());
+
+        try {
+            Textures.registerTexture(Tiles.TILE);
+            Textures.registerTexture(Tiles.BRICK);
+            Textures.registerTexture(Tiles.BLACK_TILE);
+            Textures.registerTexture(Tiles.WALL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void render(Graphics2D graphics){

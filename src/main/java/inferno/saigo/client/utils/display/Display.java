@@ -1,4 +1,4 @@
-package inferno.saigo.client;
+package inferno.saigo.client.utils.display;
 
 import inferno.saigo.client.utils.display.DisplayReference;
 

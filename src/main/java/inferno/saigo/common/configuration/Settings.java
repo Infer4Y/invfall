@@ -12,9 +12,7 @@ public class Settings {
     }
 
     public static String getProperty(String key){
-        String value = properties.getProperty(key, null);
-        System.out.println(key+"="+value);
-        return value;
+        return properties.getProperty(key, null);
     }
 
     public static void loadSettings(){
@@ -34,7 +32,7 @@ public class Settings {
 
     public static void saveSettings(){
         File settings = new File(System.getProperty("user.home")+File.separator+name+File.separator+"settings.properties");
-        
+
         try {
             FileOutputStream fr = new FileOutputStream(settings);
             properties.store(fr, "Settings "+name+"-"+version);
