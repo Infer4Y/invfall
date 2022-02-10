@@ -48,17 +48,17 @@ public class Renderer {
                         && ((ObjectRenderingCoord) object_to_render).getY() > camera.getY() - tileRenderDistance
                         && ((ObjectRenderingCoord) object_to_render).getY() < camera.getY() + tileRenderDistance) {
 
-                    graphics.translate(Math.round((-camera.getX() * tileSize) + (DisplayReference.view.getWidth() >> 1)),
-                            Math.round((-camera.getY() * tileSize) + (DisplayReference.view.getHeight() >> 1)));
+                    graphics.translate((int)((-camera.getX() * tileSize) + (DisplayReference.view.getWidth() >> 1)),
+                            (int)((-camera.getY() * tileSize) + (DisplayReference.view.getHeight() >> 1)));
                     object_to_render.render(graphics, tileSize);
-                    graphics.translate(Math.round((camera.getX() * tileSize) - (DisplayReference.view.getWidth() >> 1)),
-                            Math.round((camera.getY() * tileSize) - (DisplayReference.view.getHeight() >> 1)));
+                    graphics.translate((int)((camera.getX() * tileSize) - (DisplayReference.view.getWidth() >> 1)),
+                            (int)((camera.getY() * tileSize) - (DisplayReference.view.getHeight() >> 1)));
                 }
             } else {
                 graphics.translate((int) (-camera.getX() * tileSize),
                         (int) (-camera.getY() * tileSize));
                 object_to_render.render(graphics, tileSize);
-                graphics.translate(Math.round(camera.getX() * tileSize), Math.round(camera.getY() * tileSize));
+                graphics.translate((int)(camera.getX() * tileSize), (int)(camera.getY() * tileSize));
             }
         }));
     }

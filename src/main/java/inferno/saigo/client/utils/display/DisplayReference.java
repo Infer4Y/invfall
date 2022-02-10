@@ -19,7 +19,7 @@ public class DisplayReference {
 
     public static long last_loop_time = System.nanoTime();
     public static long current_time;
-    public static double delta_dime;
+    public static double delta_time;
     public static long second_timer = System.currentTimeMillis();
 
     public static BufferStrategy buffer_strategy = null;

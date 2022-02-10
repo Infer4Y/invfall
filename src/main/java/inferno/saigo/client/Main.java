@@ -3,7 +3,6 @@ package inferno.saigo.client;
 import inferno.saigo.client.utils.GameSetup;
 
 public class Main implements Runnable{
-    public static int[][] map = new int[200][200];
 
     public static final Main INSTANCE = new Main();
 
@@ -13,6 +12,7 @@ public class Main implements Runnable{
 
     @Override
     public void run() {
-        GameSetup.preinit();
+        GameSetup.preInitialization();
+        GameSetup.initialization();
     }
 }

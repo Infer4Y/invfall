@@ -15,6 +15,8 @@ public class ClientSettings {
         Settings.properties.setProperty("key_binds.jump", String.valueOf(KeyEvent.VK_SPACE));
         Settings.properties.setProperty("key_binds.left",     String.valueOf(KeyEvent.VK_A));
         Settings.properties.setProperty("key_binds.right",    String.valueOf(KeyEvent.VK_D));
+        Settings.properties.setProperty("key_binds.forward",  String.valueOf(KeyEvent.VK_W));
+        Settings.properties.setProperty("key_binds.backward", String.valueOf(KeyEvent.VK_S));
         Settings.properties.setProperty("key_binds.use",      String.valueOf(KeyEvent.VK_E));
         Settings.properties.setProperty("key_binds.map",      String.valueOf(KeyEvent.VK_M));
         Settings.properties.setProperty("key_binds.speech",   String.valueOf(KeyEvent.VK_V));
