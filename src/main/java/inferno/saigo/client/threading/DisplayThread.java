@@ -14,6 +14,8 @@ public class DisplayThread extends Thread{
         while(!Thread.currentThread().isInterrupted() && DisplayReference.running) {
             DisplayUtils.render();
 
+            DisplayReference.controller.init();
+
             if (System.currentTimeMillis() - DisplayReference.second_timer > 1000) {
                 DisplayReference.second_timer += 1000;
                 System.out.print(DisplayReference.FPS + "\n");

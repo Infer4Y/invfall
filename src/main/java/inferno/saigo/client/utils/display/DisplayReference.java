@@ -1,6 +1,8 @@
 package inferno.saigo.client.utils.display;
 
 import inferno.saigo.client.rendering.Renderer;
+import inferno.saigo.client.utils.client.Controller;
+import inferno.saigo.client.utils.client.Key;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -9,6 +11,7 @@ import java.awt.image.BufferedImage;
 public class DisplayReference {
     public static boolean running = true;
     public static Display display;
+    public static Controller controller;
     public static Renderer renderer;
 
     public static final long NANOSECOND        = 1000000000;
@@ -28,4 +31,10 @@ public class DisplayReference {
 
     public static GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static GraphicsConfiguration defaultConfiguration = localGraphicsEnvironment.getDefaultScreenDevice().getDefaultConfiguration();
+
+    public static Key UP = new Key();
+    public static Key LEFT = new Key();
+    public static Key DOWN = new Key();
+    public static Key RIGHT = new Key();
+    public static Key USE = new Key();
 }

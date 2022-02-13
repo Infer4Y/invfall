@@ -7,6 +7,7 @@ import inferno.saigo.client.rendering.ObjectRenderingTile;
 import inferno.saigo.client.rendering.Renderer;
 import inferno.saigo.client.threading.CommonThread;
 import inferno.saigo.client.threading.DisplayThread;
+import inferno.saigo.client.utils.client.Controller;
 import inferno.saigo.client.utils.display.Display;
 import inferno.saigo.client.utils.display.DisplayReference;
 import inferno.saigo.common.configuration.Settings;
@@ -32,6 +33,8 @@ public class GameSetup {
 
         // Window setup
         DisplayReference.display = new Display("Test", Integer.parseInt(Settings.getProperty("width")), Integer.parseInt(Settings.getProperty("height")));
+        DisplayReference.controller = new Controller();
+        DisplayReference.display.addKeyListener(DisplayReference.controller);
 
         //Renderer setup
         DisplayReference.renderer = new Renderer();
@@ -43,6 +46,7 @@ public class GameSetup {
     }
 
     public static void initialization(){
+
         Items.init();
         Tiles.init();
         Recipes.init();
