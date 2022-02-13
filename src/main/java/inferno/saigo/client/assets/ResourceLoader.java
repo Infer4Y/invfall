@@ -11,32 +11,33 @@ import java.util.Objects;
 public class ResourceLoader {
     private static final Gson parser = new Gson();
 
-    public static ResourceLocation item_resource_location;
-    //public static ResourceLocation sound_resource_location;
-    public static ResourceLocation tile_resource_location;
 
     public static Model item_model = new Model();
     public static Model tile_model = new Model();
 
     public static ResourceLocation receiveImagePath(Item item){
-        item_resource_location = new ResourceLocation(item.getDomain(), "models/items/" + item.getName() + ".json");
+        ResourceLocation item_resource_location = new ResourceLocation(item.getDomain(), "models/items/" + item.getName() + ".json");
         try {
-            Reader item_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream(item_resource_location.toString())));
+            Reader item_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(item_resource_location.toString())));
             item_model = parser.fromJson(item_reader, Model.class);
-        } catch (NullPointerException ignored){}
+        } catch (NullPointerException e){
+            System.out.println(item_resource_location +" could not be loaded or is null");
+            return null;
+        }
         item_resource_location = new ResourceLocation(item_model.domain, "textures/" + item_model.path);
 
         return item_resource_location;
     }
 
     public static ResourceLocation receiveImagePath(Tile tile){
-        tile_resource_location = new ResourceLocation(tile.getDomain(), "models/tiles/" + tile.getName() + ".json");
+        ResourceLocation tile_resource_location = new ResourceLocation(tile.getDomain(), "models/tiles/" + tile.getName() + ".json");
 
         try {
-            Reader tile_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream(tile_resource_location.toString())));
+            Reader tile_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(tile_resource_location.toString())));
             tile_model = parser.fromJson(tile_reader, Model.class);
         } catch (NullPointerException e){
-            System.out.println(tile_resource_location.toString()+" could not be loaded or is null");
+            System.out.println(tile_resource_location +" could not be loaded or is null");
+            return null;
         }
 
         tile_resource_location = new ResourceLocation(tile_model.domain, "textures/" + tile_model.path);

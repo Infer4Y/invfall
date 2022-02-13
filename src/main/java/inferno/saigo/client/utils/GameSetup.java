@@ -48,6 +48,6 @@ public class GameSetup {
         Recipes.init();
         Textures.init();
 
-        //DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
     }
 }

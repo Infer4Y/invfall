@@ -26,4 +26,8 @@ public class Items {
             register(item);
         }
     }
+
+    public static HashMap<String, Item> getItems() {
+        return ITEMS;
+    }
 }

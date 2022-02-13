@@ -39,4 +39,8 @@ public class Tiles {
             register(tile);
         }
     }
+
+    public static HashMap<String, Tile> getTiles(){
+        return TILES;
+    }
 }
