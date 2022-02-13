@@ -6,18 +6,22 @@ import java.util.HashMap;
 
 public class Items {
     private static final HashMap<String, Item> ITEMS = new HashMap<>();
-    public static final Item CURSOR = new Item("cursor");
+    public static final Item COAL = new Item("coal");
+    public static final Item RUBY = new Item("ruby");
+    public static final Item DIAMOND = new Item("diamond");
+    public static final Item INGOT = new Item("ingot");
+    public static final Item STICK = new Item("stick");
 
     public static void init(){
-        register(CURSOR);
+        register(COAL, RUBY, DIAMOND, INGOT, STICK);
     }
 
     public static Item getItem(String name) {
-        return ITEMS.getOrDefault(name, null);
+        return ITEMS.getOrDefault(name, ITEMS.get("placeholder"));
     }
 
     public static void register(Item item){
-        ITEMS.put(item.getName(), item);
+        ITEMS.put(item.toString(), item);
         //System.out.println(item.getName());
     }
 

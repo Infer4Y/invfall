@@ -1,8 +1,10 @@
 package inferno.saigo.client.utils;
 
 import inferno.saigo.client.Main;
+import inferno.saigo.client.assets.Texture;
 import inferno.saigo.client.assets.Textures;
 import inferno.saigo.client.configuration.ClientSettings;
+import inferno.saigo.client.rendering.ObjectRenderingTexture;
 import inferno.saigo.client.rendering.ObjectRenderingTile;
 import inferno.saigo.client.rendering.Renderer;
 import inferno.saigo.client.threading.CommonThread;
@@ -34,7 +36,8 @@ public class GameSetup {
         // Window setup
         DisplayReference.display = new Display("Test", Integer.parseInt(Settings.getProperty("width")), Integer.parseInt(Settings.getProperty("height")));
         DisplayReference.controller = new Controller();
-        DisplayReference.display.addKeyListener(DisplayReference.controller);
+        DisplayReference.display.getCanvas().addKeyListener(DisplayReference.controller);
+        DisplayReference.display.getCanvas().requestFocus();
 
         //Renderer setup
         DisplayReference.renderer = new Renderer();
@@ -53,5 +56,11 @@ public class GameSetup {
         Textures.init();
 
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.LOG, -1,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.WALL, 1,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PLANKS, 0,-1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIRT, 0,1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.TILE, -1,-1));
+        DisplayReference.renderer.add(2, new ObjectRenderingTexture(Textures.getTexture("crosshair")));
     }
 }

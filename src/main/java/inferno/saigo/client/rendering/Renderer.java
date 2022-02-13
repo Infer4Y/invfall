@@ -46,10 +46,9 @@ public class Renderer {
                             (int)((camera.getY() * tileSize) - (DisplayReference.view.getHeight() >> 1)));
                 }
             } else {
-                graphics.translate((int) (-camera.getX() * tileSize),
-                        (int) (-camera.getY() * tileSize));
+                //graphics.translate((int) (-camera.getX() * tileSize), (int) (-camera.getY() * tileSize));
                 object_to_render.render(graphics, tileSize);
-                graphics.translate((int)(camera.getX() * tileSize), (int)(camera.getY() * tileSize));
+                //graphics.translate((int)(camera.getX() * tileSize), (int)(camera.getY() * tileSize));
             }
         }));
     }

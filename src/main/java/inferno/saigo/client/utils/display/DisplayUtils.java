@@ -12,6 +12,7 @@ public class DisplayUtils {
         }
 
         Graphics2D viewGraphics = DisplayReference.view.createGraphics();
+        viewGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         viewGraphics.setColor(Color.BLACK);
         viewGraphics.fillRect(0,0, DisplayReference.view.getWidth(), DisplayReference.view.getHeight());
         viewGraphics.setColor(Color.WHITE);
@@ -19,6 +20,7 @@ public class DisplayUtils {
         viewGraphics.dispose();
 
         Graphics2D drawGraphics = (Graphics2D) DisplayReference.display.getCanvas().getBufferStrategy().getDrawGraphics();
+        drawGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         drawGraphics.setColor(Color.BLACK);
         drawGraphics.fillRect(0,0, DisplayReference.display.getCanvas().getWidth(), DisplayReference.display.getCanvas().getHeight());

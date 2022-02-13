@@ -29,7 +29,7 @@ public class Tiles {
     }
 
     public static void register(Tile tile){
-        TILES.put(tile.getName(), tile);
+        TILES.put(tile.toString(), tile);
         Items.register(tile.getTileItem());
         //System.out.println(tile.getName());
     }

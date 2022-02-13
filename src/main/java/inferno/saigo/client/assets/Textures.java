@@ -15,6 +15,7 @@ public class Textures {
     public static void init(){
         {
             TEXTURE_MAP.put("placeholder", new Texture(new ResourceLocation("textures/placeholder.png")));
+            TEXTURE_MAP.put("crosshair", new Texture(new ResourceLocation("textures/gui/crosshair.png")));
         }
         Tiles.getTiles().values().forEach(Textures::registerTexture);
         Items.getItems().values().forEach(Textures::registerTexture);

@@ -29,4 +29,9 @@ public class Item {
         this.domain = domain;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return domain + ":" + name;
+    }
 }
