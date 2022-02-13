@@ -1,6 +1,7 @@
 package inferno.saigo.client.utils;
 
 import inferno.saigo.client.Main;
+import inferno.saigo.client.assets.Textures;
 import inferno.saigo.client.configuration.ClientSettings;
 import inferno.saigo.client.rendering.ObjectRenderingTile;
 import inferno.saigo.client.rendering.Renderer;
@@ -45,6 +46,8 @@ public class GameSetup {
         Items.init();
         Tiles.init();
         Recipes.init();
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.LOG, 0,0));
+        Textures.init();
+
+        //DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
     }
 }

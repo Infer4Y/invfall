@@ -11,9 +11,8 @@ import java.util.LinkedList;
 
 public class Textures {
     private static final HashMap<String, LinkedList<Texture>> TEXTURE_MAP = new HashMap<>();
-    private static Texture placeholder;
 
-    static {
+    public static void init(){
         try {
             LinkedList <Texture> temp = new LinkedList<>();
             temp.add(new Texture(new ResourceLocation("textures/placeholder.png")));
@@ -21,9 +20,6 @@ public class Textures {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void init(){
         try {
             Textures.registerTexture(Tiles.TILE);
             Textures.registerTexture(Tiles.BRICK);
@@ -36,19 +32,19 @@ public class Textures {
 
     public static void registerTexture(Tile tile) throws IOException {
         LinkedList <Texture> temp = new LinkedList<>();
-        temp.add(new Texture(new ResourceLocation("textures/tiles/"+tile.getName()+".png")));
+        temp.add(new Texture(ResourceLoader.receiveImagePath(tile)));
         TEXTURE_MAP.put(tile.getName(), temp);
     }
 
     public static void registerTexture(Item item) throws IOException {
         LinkedList <Texture> temp = new LinkedList<>();
-        temp.add(new Texture(new ResourceLocation("textures/tiles/"+item.getName()+".png")));
+        temp.add(new Texture(ResourceLoader.receiveImagePath(item)));
         TEXTURE_MAP.put(item.getName(), temp);
     }
 
     public static void registerTexture(ItemIngot item) throws IOException {
         LinkedList <Texture> temp = new LinkedList<>();
-        temp.add(new Texture(new ResourceLocation("textures/tiles/"+item.getName()+".png")));
+        temp.add(new Texture(ResourceLoader.receiveImagePath(item)));
         TEXTURE_MAP.put(item.getName(), temp);
     }
 

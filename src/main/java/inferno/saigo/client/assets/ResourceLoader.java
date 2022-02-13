@@ -5,45 +5,38 @@ import inferno.saigo.client.Main;
 import inferno.saigo.common.items.Item;
 import inferno.saigo.common.tiles.Tile;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.Objects;
 
 public class ResourceLoader {
     private static final Gson parser = new Gson();
-    private static Reader reader;
 
     public static ResourceLocation item_resource_location;
-    public static ResourceLocation sound_resource_location;
+    //public static ResourceLocation sound_resource_location;
     public static ResourceLocation tile_resource_location;
-    public static Model item_model;
-    public static Model tile_model;
 
+    public static Model item_model = new Model();
+    public static Model tile_model = new Model();
 
     public static ResourceLocation receiveImagePath(Item item){
-        item_resource_location = new ResourceLocation(item.getDomain(), "items/" + item.getName() + ".json");
-
+        item_resource_location = new ResourceLocation(item.getDomain(), "models/items/" + item.getName() + ".json");
         try {
-            reader = Files.newBufferedReader(Paths.get(Main.class.getClassLoader().getResource(item_resource_location.toString()).getPath()));
-            item_model = parser.fromJson(reader, Model.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        tile_resource_location = new ResourceLocation(item_model.domain, "textures/" + item_model.path);
+            Reader item_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream(item_resource_location.toString())));
+            item_model = parser.fromJson(item_reader, Model.class);
+        } catch (NullPointerException ignored){}
+        item_resource_location = new ResourceLocation(item_model.domain, "textures/" + item_model.path);
 
         return item_resource_location;
     }
 
     public static ResourceLocation receiveImagePath(Tile tile){
-        tile_resource_location = new ResourceLocation(tile.getDomain(), "items/" + tile.getName() + ".json");
+        tile_resource_location = new ResourceLocation(tile.getDomain(), "models/tiles/" + tile.getName() + ".json");
 
         try {
-            reader = Files.newBufferedReader(Paths.get(Main.class.getClassLoader().getResource(tile_resource_location.toString()).getPath()));
-            tile_model = parser.fromJson(reader, Model.class);
-        } catch (IOException e) {
-            e.printStackTrace();
+            Reader tile_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream(tile_resource_location.toString())));
+            tile_model = parser.fromJson(tile_reader, Model.class);
+        } catch (NullPointerException e){
+            System.out.println(tile_resource_location.toString()+" could not be loaded or is null");
         }
 
         tile_resource_location = new ResourceLocation(tile_model.domain, "textures/" + tile_model.path);

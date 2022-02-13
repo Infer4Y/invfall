@@ -18,7 +18,7 @@ public class Items {
 
     public static void register(Item item){
         ITEMS.put(item.getName(), item);
-        System.out.println(item.getName());
+        //System.out.println(item.getName());
     }
 
     public static void register(Item... items){

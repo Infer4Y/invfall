@@ -17,8 +17,10 @@ public class ObjectRenderingTile extends ObjectRenderingCoord {
     @Override
     public void render(Graphics2D graphics, int tileSize) {
         graphics.translate((int)(getX()) * tileSize - (tileSize >> 1), (int)(getY()) * tileSize - (tileSize >> 1));
+
         //graphics.drawImage(texture.getImage(),(int)(getX()) * tileSize - (tileSize >> 1), (int)(getY()) * tileSize - (tileSize >> 1), tileSize, tileSize,null);
         graphics.drawImage(texture.getImage(),0, 0, tileSize, tileSize,null);
+
         graphics.translate(-(int)(getX()) * tileSize + (tileSize >> 1), -(int)(getY()) * tileSize + (tileSize >> 1));
     }
 }

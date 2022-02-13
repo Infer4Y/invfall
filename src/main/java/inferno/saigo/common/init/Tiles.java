@@ -31,7 +31,7 @@ public class Tiles {
     public static void register(Tile tile){
         TILES.put(tile.getName(), tile);
         Items.register(tile.getTileItem());
-        System.out.println(tile.getName());
+        //System.out.println(tile.getName());
     }
 
     public static void register(Tile... tiles){
