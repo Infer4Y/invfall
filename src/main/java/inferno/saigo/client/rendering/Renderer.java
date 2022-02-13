@@ -13,12 +13,12 @@ public class Renderer {
     // Int : Layer = 3
     private final HashMap<Integer, LinkedList<ObjectRendering>> render_object_list_list = new HashMap<>();
 
-    public Camera camera = new Camera(150,150);
+    public Camera camera = new Camera(0,0);
 
 
     public int gridSpaceX = 5;
     //This is the size per tile in pixels. One length is equivalent in pixel
-    public int tileSize = 128;
+    public int tileSize = 64;
     //This is the size per tile in pixels. One length is equivalent in pixel
     public int tileRenderDistance = 4;
 
@@ -29,15 +29,6 @@ public class Renderer {
         render_object_list_list.put(1, new LinkedList<>());
         //Foreground Layer
         render_object_list_list.put(2, new LinkedList<>());
-
-        try {
-            Textures.registerTexture(Tiles.TILE);
-            Textures.registerTexture(Tiles.BRICK);
-            Textures.registerTexture(Tiles.BLACK_TILE);
-            Textures.registerTexture(Tiles.WALL);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void render(Graphics2D graphics){

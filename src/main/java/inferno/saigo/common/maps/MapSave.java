@@ -8,6 +8,7 @@ import inferno.saigo.common.tiles.Tile;
 import java.io.*;
 
 public class MapSave {
+
     public static JsonWriter writer;
     public static JsonReader reader;
 
