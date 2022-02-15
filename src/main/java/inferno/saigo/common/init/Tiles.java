@@ -11,6 +11,7 @@ public class Tiles {
     public static final Tile BLACK_TILE = new Tile("black_tile");
     public static final Tile WALL = new Tile("wall");
     public static final Tile LOG = new Tile("log");
+    public static final Tile LEAVES = new Tile("leaves");
     public static final Tile PLANKS = new Tile("plank");
     public static final Tile DIRT = new Tile("dirt");
     public static final Tile STONE = new Tile("stone");
@@ -18,6 +19,10 @@ public class Tiles {
     public static final Tile PAINTING_ONE = new Tile("painting_one");
     public static final Tile PAINTING_TWO = new Tile("painting_two");
     public static final Tile PAINTING_THREE = new Tile("painting_three");
+    public static final Tile DIAG_BRICK_ZERO = new Tile("diag_brick_zero");
+    public static final Tile DIAG_BRICK_ONE = new Tile("diag_brick_one");
+    public static final Tile DIAG_BRICK_TWO = new Tile("diag_brick_two");
+    public static final Tile DIAG_BRICK_THREE = new Tile("diag_brick_three");
     public static final Tile PLACEHOLDER = new Tile("placeholder");
 
     public static void init(){
@@ -26,7 +31,8 @@ public class Tiles {
         register(BLACK_TILE);
         register(WALL);
         register(PAINTING_ONE, PAINTING_TWO, PAINTING_THREE);
-        register(LOG, PLANKS, DIRT, STONE, RUBY_TILE, PLACEHOLDER);
+        register(LOG, LEAVES, PLANKS, DIRT, STONE, RUBY_TILE, PLACEHOLDER);
+        register(DIAG_BRICK_ZERO, DIAG_BRICK_ONE, DIAG_BRICK_TWO, DIAG_BRICK_THREE);
     }
 
     public static Tile getTile(String name) {

@@ -18,6 +18,7 @@ public class Texture {
             image.setAccelerationPriority(1);
         } catch (IOException|IllegalArgumentException|NullPointerException e) {
             System.out.println(location + " could not be loaded or is null");
+            this.image = Textures.getTexture("placeholder").getImage();
         }
     }
 

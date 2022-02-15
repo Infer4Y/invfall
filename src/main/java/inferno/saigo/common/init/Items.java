@@ -11,9 +11,11 @@ public class Items {
     public static final Item DIAMOND = new Item("diamond");
     public static final Item INGOT = new Item("ingot");
     public static final Item STICK = new Item("stick");
+    public static final Item PICKAXE = new Item("pickaxe");
+    public static final Item SHOVEL = new Item("shovel");
 
     public static void init(){
-        register(COAL, RUBY, DIAMOND, INGOT, STICK);
+        register(COAL, RUBY, DIAMOND, INGOT, STICK, PICKAXE, SHOVEL);
     }
 
     public static Item getItem(String name) {
