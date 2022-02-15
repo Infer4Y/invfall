@@ -11,7 +11,7 @@ public class ObjectRenderingTile extends ObjectRenderingCoord {
 
     public ObjectRenderingTile(Tile tile, int x, int y) {
         super(x, y);
-        this.texture = Textures.getTexture(tile.getName());
+        this.texture = Textures.getTexture(tile.toString());
     }
 
     @Override

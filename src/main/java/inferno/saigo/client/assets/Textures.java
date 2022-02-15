@@ -22,17 +22,17 @@ public class Textures {
     }
 
     public static void registerTexture(Tile tile) {
-        TEXTURE_MAP.put(tile.getName(), new Texture(ResourceLoader.receiveImagePath(tile)));
+        TEXTURE_MAP.put(tile.toString(), new Texture(ResourceLoader.receiveImagePath(tile)));
     }
 
     public static void registerTexture(Item item) {
         if (!(item instanceof ItemTile)) {
-            TEXTURE_MAP.put(item.getName(), new Texture(ResourceLoader.receiveImagePath(item)));
+            TEXTURE_MAP.put(item.toString(), new Texture(ResourceLoader.receiveImagePath(item)));
         }
     }
 
     public static void registerTexture(ItemIngot item) {
-        TEXTURE_MAP.put(item.getName(), new Texture(ResourceLoader.receiveImagePath(item)));
+        TEXTURE_MAP.put(item.toString(), new Texture(ResourceLoader.receiveImagePath(item)));
     }
 
     public static void registerTexture(Item... items){

@@ -11,7 +11,7 @@ public class ObjectRenderingItem extends ObjectRenderingCoord {
 
     public ObjectRenderingItem(Item item, int x, int y) {
         super(x, y);
-        this.texture = Textures.getTexture(item.getName());
+        this.texture = Textures.getTexture(item.toString());
     }
 
     @Override
