@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class Controller implements KeyListener {
     public HashMap<Integer, Key> keyBindings = new HashMap<>();
     public static boolean[] other = new boolean[256];
+    private final Key dummy = new Key();
 
     public void init() {
         bind(Integer.parseInt(Settings.getProperty("key_binds.forward")),    DisplayReference.UP);
@@ -22,13 +23,13 @@ public class Controller implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         other[e.getExtendedKeyCode()] = true;
-        keyBindings.get(e.getKeyCode()).isDown = true;
+        keyBindings.getOrDefault(e.getKeyCode(), dummy).isDown = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         other[e.getExtendedKeyCode()] = false;
-        keyBindings.get(e.getKeyCode()).isDown = false;
+        keyBindings.getOrDefault(e.getKeyCode(), dummy).isDown = false;
     }
 
     public boolean isKeyBinded(int extendedKey){

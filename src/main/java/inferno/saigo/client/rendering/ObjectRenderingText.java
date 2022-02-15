@@ -1,5 +1,7 @@
 package inferno.saigo.client.rendering;
 
+import inferno.saigo.client.assets.Fonts;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -21,9 +23,10 @@ public class ObjectRenderingText extends ObjectRenderingCoord {
         graphics.setColor(Color.BLACK);
         graphics.drawRect(0,0, tileSize, tileSize);
         graphics.setColor(Color.WHITE);
-        graphics.drawString(text,4,16);
+        graphics.setFont(Fonts.OPEN_SANS);
+        graphics.drawString(text,4,28);
         graphics.setColor(Color.WHITE);
-        graphics.drawRect(tileSize/4,tileSize/4, tileSize-(tileSize/4*2)-1,tileSize-(tileSize/4*2)-1);
+        graphics.fillRect(tileSize/4-1,tileSize/4-1, tileSize-(tileSize/4*2)-2,tileSize-(tileSize/4*2)-2);
         graphics.translate(-(int)(getX()) * tileSize + (tileSize >> 1), -(int)(getY()) * tileSize + (tileSize >> 1));
     }
 }

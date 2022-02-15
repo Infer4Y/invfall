@@ -17,10 +17,10 @@ public class ImageUtils {
 
         double canvas_aspect = (double) canvas_height / canvas_width;
 
-        int x1 = 0; // top left X position
-        int y1 = 0; // top left Y position
-        int x2;     // bottom right X position
-        int y2;     // bottom right Y position
+        int x1 = 0,
+            y1 = 0,
+            x2,
+            y2;     // top left X position, top left Y position, bottom right X position, bottom right Y position
 
         if (image_width < canvas_width && image_height < canvas_height) {
             // the image is smaller than the canvas
@@ -50,12 +50,12 @@ public class ImageUtils {
 
     public static BufferedImage resize(BufferedImage buffered_image, int target_width, int target_height) {
 
-        double scale_x = (double) target_width / buffered_image.getWidth();
-        double scale_y = (double) target_height / buffered_image.getHeight();
-        double scale = Math.min(scale_x, scale_y);
+        double  scale_x = (double) target_width / buffered_image.getWidth(),
+                scale_y = (double) target_height / buffered_image.getHeight(),
+                scale = Math.min(scale_x, scale_y);
 
-        int image_width = (int) (buffered_image.getWidth() * scale);
-        int image_height = (int) (buffered_image.getHeight() * scale);
+        int image_width = (int) (buffered_image.getWidth() * scale),
+            image_height = (int) (buffered_image.getHeight() * scale);
 
         Image temporary_scaled_instance = buffered_image.getScaledInstance(image_width, image_height, Image.SCALE_DEFAULT);
 

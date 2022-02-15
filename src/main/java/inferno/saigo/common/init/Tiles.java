@@ -14,6 +14,7 @@ public class Tiles {
     public static final Tile PLANKS = new Tile("plank");
     public static final Tile DIRT = new Tile("dirt");
     public static final Tile STONE = new Tile("stone");
+    public static final Tile RUBY_TILE = new Tile("ruby_tile");
     public static final Tile PLACEHOLDER = new Tile("placeholder");
 
     public static void init(){
@@ -21,7 +22,7 @@ public class Tiles {
         register(BRICK);
         register(BLACK_TILE);
         register(WALL);
-        register(LOG, PLANKS, DIRT, STONE, PLACEHOLDER);
+        register(LOG, PLANKS, DIRT, STONE, RUBY_TILE, PLACEHOLDER);
     }
 
     public static Tile getTile(String name) {

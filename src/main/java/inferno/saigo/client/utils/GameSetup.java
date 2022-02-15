@@ -1,12 +1,11 @@
 package inferno.saigo.client.utils;
 
 import inferno.saigo.client.Main;
+import inferno.saigo.client.assets.Fonts;
 import inferno.saigo.client.assets.Texture;
 import inferno.saigo.client.assets.Textures;
 import inferno.saigo.client.configuration.ClientSettings;
-import inferno.saigo.client.rendering.ObjectRenderingTexture;
-import inferno.saigo.client.rendering.ObjectRenderingTile;
-import inferno.saigo.client.rendering.Renderer;
+import inferno.saigo.client.rendering.*;
 import inferno.saigo.client.threading.CommonThread;
 import inferno.saigo.client.threading.DisplayThread;
 import inferno.saigo.client.utils.client.Controller;
@@ -41,7 +40,7 @@ public class GameSetup {
 
         //Renderer setup
         DisplayReference.renderer = new Renderer();
-        DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/6;
+        DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/7;
 
         // Thread setup
         new DisplayThread(Main.INSTANCE, "Display0").start();
@@ -54,13 +53,30 @@ public class GameSetup {
         Tiles.init();
         Recipes.init();
         Textures.init();
+        Fonts.init();
 
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
+        for (int x = -2; x <= 2; x++) {
+            for (int y = -2; y <= 2; y++) {
+                DisplayReference.renderer.add(0, new ObjectRenderingText("Coord" + x +',' + y, x,y));
+            }
+        }
+
+
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.LOG, -1,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.WALL, 1,0));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PLANKS, 0,-1));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIRT, 0,1));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.TILE, -1,-1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.RUBY_TILE, 1,-1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BRICK, 1,1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PLACEHOLDER, -1,1));
+        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.STICK, 0,2));
+        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.RUBY, 0,-2));
+        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.DIAMOND, 2,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.INGOT, -2,0));
+        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.COAL, -2,1));
+
         DisplayReference.renderer.add(2, new ObjectRenderingTexture(Textures.getTexture("crosshair")));
     }
 }
