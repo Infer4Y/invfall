@@ -16,7 +16,7 @@ public class ResourceLoader {
     public static Model tile_model = new Model();
 
     public static ResourceLocation receiveImagePath(Item item){
-        ResourceLocation item_resource_location = new ResourceLocation(item.getDomain(), "models/items/" + item.getName() + ".json");
+        ResourceLocation item_resource_location = new ResourceLocation(item.getDomain(), "models/items/" + item.getRegistryName() + ".json");
         try {
             Reader item_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(item_resource_location.toString())));
             item_model = parser.fromJson(item_reader, Model.class);
@@ -30,7 +30,7 @@ public class ResourceLoader {
     }
 
     public static ResourceLocation receiveImagePath(Tile tile){
-        ResourceLocation tile_resource_location = new ResourceLocation(tile.getDomain(), "models/tiles/" + tile.getName() + ".json");
+        ResourceLocation tile_resource_location = new ResourceLocation(tile.getDomain(), "models/tiles/" + tile.getRegistryName() + ".json");
 
         try {
             Reader tile_reader = new InputStreamReader(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(tile_resource_location.toString())));

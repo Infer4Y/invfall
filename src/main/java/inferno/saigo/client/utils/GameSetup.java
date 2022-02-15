@@ -73,10 +73,10 @@ public class GameSetup {
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_ONE, -2,-2));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_TWO, -1,-2));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_THREE, -0,-2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_ZERO, 1,1));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_TWO, 1,1));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_ONE, 2,1));
         DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_TWO, 1,2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_THREE, 2,2));
+        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_ONE, 2,2));
         DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.STICK, 0,2));
         DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.RUBY, 1,-2));
         DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.DIAMOND, 2,0));
