@@ -9796,7 +9796,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": -1,
@@ -9804,7 +9804,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": -1,
@@ -9812,7 +9812,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": -1,
@@ -10196,7 +10196,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": 0,
@@ -10204,7 +10204,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "painting_one",
         "domain": "saigo"
       },
       "x": 0,
@@ -10212,7 +10212,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": 0,
@@ -10596,7 +10596,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": 1,
@@ -10604,7 +10604,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": 1,
@@ -10612,7 +10612,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "ruby_tile",
         "domain": "saigo"
       },
       "x": 1,

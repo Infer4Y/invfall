@@ -50,18 +50,20 @@ public class GameSetup {
     }
 
     public static void initialization(){
+        Map map;
 
-        Map map = MapSave.loadMapJar(new ResourceLocation("maps/test_map.json"));
         Items.init();
         Tiles.init();
         Recipes.init();
         Textures.init();
         Fonts.init();
-        map = null;
+
         map = MapSave.loadMapJar(new ResourceLocation("maps/test_map.json"));
 
-        map.tiles.forEach(tile -> DisplayReference.renderer.add(2, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
+        map.tiles.forEach(tile -> DisplayReference.renderer.add(0, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
 
         DisplayReference.renderer.add(2, new ObjectRenderingTexture(Textures.getTexture("crosshair")));
+
+        DisplayReference.renderer.render_enabled = true;
     }
 }

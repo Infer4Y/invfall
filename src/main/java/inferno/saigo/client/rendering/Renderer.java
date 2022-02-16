@@ -21,6 +21,8 @@ public class Renderer {
     public int tileSize = 64;
     //This is the size per tile in pixels. One length is equivalent in pixel
     public int tileRenderDistance = 4;
+    //This it to enable and disable rendering.
+    public boolean render_enabled = false;
 
     public Renderer() {
         //Background Layer
@@ -32,6 +34,7 @@ public class Renderer {
     }
 
     public void render(Graphics2D graphics){
+        if (!render_enabled) return;
         render_object_list_list.values().forEach((object_to_render_list) -> object_to_render_list.forEach(object_to_render -> {
             if (object_to_render instanceof ObjectRenderingCoord) {
                 if (((ObjectRenderingCoord) object_to_render).getX() > camera.getX() - tileRenderDistance

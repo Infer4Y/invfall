@@ -7,7 +7,6 @@ import inferno.saigo.client.assets.ResourceLocation;
 import inferno.saigo.common.configuration.Settings;
 
 import java.io.*;
-import java.util.Objects;
 
 public class MapSave {
     private static final Gson parser = new Gson();

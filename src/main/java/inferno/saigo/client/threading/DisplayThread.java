@@ -1,6 +1,5 @@
 package inferno.saigo.client.threading;
 
-import inferno.saigo.client.Main;
 import inferno.saigo.client.utils.display.DisplayReference;
 import inferno.saigo.client.utils.display.DisplayUtils;
 
