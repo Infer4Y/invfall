@@ -2,9 +2,11 @@ package inferno.saigo.common.maps;
 
 import inferno.saigo.common.tiles.TileData;
 
+import java.util.List;
+
 public class Map {
     public int width, height;
-    public TileData[][] tiles;
+    public List<TileData> tiles;
 
     @Override
     public String toString() {

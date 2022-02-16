@@ -2,6 +2,7 @@ package inferno.saigo.client.utils;
 
 import inferno.saigo.client.Main;
 import inferno.saigo.client.assets.Fonts;
+import inferno.saigo.client.assets.ResourceLocation;
 import inferno.saigo.client.assets.Textures;
 import inferno.saigo.client.configuration.ClientSettings;
 import inferno.saigo.client.rendering.*;
@@ -14,6 +15,8 @@ import inferno.saigo.common.configuration.Settings;
 import inferno.saigo.common.init.Items;
 import inferno.saigo.common.init.Recipes;
 import inferno.saigo.common.init.Tiles;
+import inferno.saigo.common.maps.Map;
+import inferno.saigo.common.maps.MapSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -48,42 +51,16 @@ public class GameSetup {
 
     public static void initialization(){
 
+        Map map = MapSave.loadMapJar(new ResourceLocation("maps/test_map.json"));
         Items.init();
         Tiles.init();
         Recipes.init();
         Textures.init();
         Fonts.init();
+        map = null;
+        map = MapSave.loadMapJar(new ResourceLocation("maps/test_map.json"));
 
-        for (int x = -2; x <= 2; x++) {
-            for (int y = -2; y <= 2; y++) {
-                DisplayReference.renderer.add(0, new ObjectRenderingText("Coord" + x +',' + y, x,y));
-            }
-        }
-
-
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.LOG, -1,0));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BLACK_TILE, 0,0));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.WALL, 1,0));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PLANKS, 0,-1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIRT, 0,1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.TILE, -1,-1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.RUBY_TILE, 1,-1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.BRICK, 2,-1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PLACEHOLDER, -1,1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_ONE, -2,-2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_TWO, -1,-2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.PAINTING_THREE, -0,-2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_TWO, 1,1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_ONE, 2,1));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_TWO, 1,2));
-        DisplayReference.renderer.add(0, new ObjectRenderingTile(Tiles.DIAG_BRICK_ONE, 2,2));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.STICK, 0,2));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.RUBY, 1,-2));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.DIAMOND, 2,0));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.INGOT, -2,0));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.COAL, -2,1));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.SHOVEL, -1,2));
-        DisplayReference.renderer.add(0, new ObjectRenderingItem(Items.PICKAXE, -2,2));
+        map.tiles.forEach(tile -> DisplayReference.renderer.add(2, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
 
         DisplayReference.renderer.add(2, new ObjectRenderingTexture(Textures.getTexture("crosshair")));
     }

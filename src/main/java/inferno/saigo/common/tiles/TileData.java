@@ -2,7 +2,7 @@ package inferno.saigo.common.tiles;
 
 public class TileData {
     public Tile tile;
-    public float x, y;
+    public int x, y;
 
 
     @Override

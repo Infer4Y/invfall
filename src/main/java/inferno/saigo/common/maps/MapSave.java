@@ -25,6 +25,16 @@ public class MapSave {
         }
     }
 
+    public static void saveMapJar(ResourceLocation location, Map map) {
+
+        try (Writer writer = new OutputStreamWriter(Main.class.getClassLoader().getResource(location.toString()).openConnection().getOutputStream())) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(map, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Map loadMap(ResourceLocation location) {
 
         Map temp_map = null;
@@ -46,5 +56,23 @@ public class MapSave {
         }
 
         return temp_map;
+    }
+
+    public static Map loadMapJar(ResourceLocation location) {
+        Map temp_map = null;
+
+        try (Reader reader = new InputStreamReader(Main.class.getClassLoader().getResourceAsStream(location.toString()))) {
+
+            // Convert JSON File to Java Object
+            temp_map = parser.fromJson(reader, Map.class);
+
+            // print staff object
+            return temp_map;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
