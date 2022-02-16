@@ -8,19 +8,12 @@ public class Tile {
     private final String registry_name;
     private String domain = Settings.name.toLowerCase();
 
-    private final ItemTile item_tile;
-
     public Tile(String registry_name) {
         this.registry_name = registry_name;
-        this.item_tile = new ItemTile(this);
     }
 
     public String getRegistryName() {
         return registry_name;
-    }
-
-    public Item getTileItem() {
-        return item_tile;
     }
 
     public String getDomain() {
