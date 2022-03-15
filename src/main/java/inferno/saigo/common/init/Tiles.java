@@ -6,22 +6,23 @@ import java.util.HashMap;
 
 public class Tiles {
     private static final HashMap<String, Tile> TILES = new HashMap<>();
-    public static final Tile TILE = new Tile("tile");
-    public static final Tile BRICK = new Tile("brick");
+
     public static final Tile BLACK_TILE = new Tile("black_tile");
-    public static final Tile WALL = new Tile("wall");
-    public static final Tile LOG = new Tile("log");
-    public static final Tile LEAVES = new Tile("leaves");
-    public static final Tile PLANKS = new Tile("plank");
+    public static final Tile BRICK = new Tile("brick");
+    public static final Tile DIAG_BRICK_ONE = new Tile("diag_brick_one");
+    public static final Tile DIAG_BRICK_TWO = new Tile("diag_brick_two");
     public static final Tile DIRT = new Tile("dirt");
-    public static final Tile STONE = new Tile("stone");
-    public static final Tile RUBY_TILE = new Tile("ruby_tile");
+    public static final Tile LEAVES = new Tile("leaves");
+    public static final Tile LOG = new Tile("log");
     public static final Tile PAINTING_ONE = new Tile("painting_one");
     public static final Tile PAINTING_TWO = new Tile("painting_two");
     public static final Tile PAINTING_THREE = new Tile("painting_three");
-    public static final Tile DIAG_BRICK_ONE = new Tile("diag_brick_one");
-    public static final Tile DIAG_BRICK_TWO = new Tile("diag_brick_two");
     public static final Tile PLACEHOLDER = new Tile("placeholder");
+    public static final Tile PLANKS = new Tile("plank");
+    public static final Tile RUBY_TILE = new Tile("ruby_tile");
+    public static final Tile STONE = new Tile("stone");
+    public static final Tile TILE = new Tile("tile");
+    public static final Tile WALL = new Tile("wall");
 
     public static void init(){
         register(TILE);

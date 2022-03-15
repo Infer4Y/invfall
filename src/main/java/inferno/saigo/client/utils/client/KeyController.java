@@ -7,17 +7,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-public class Controller implements KeyListener {
+public class KeyController implements KeyListener {
     public HashMap<Integer, Key> keyBindings = new HashMap<>();
     public static boolean[] other = new boolean[256];
     private final Key dummy = new Key();
 
     public void init() {
-        bind(Integer.parseInt(Settings.getProperty("key_binds.forward")),    DisplayReference.UP);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.backward")), DisplayReference.DOWN);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.left")),     DisplayReference.LEFT);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.right")),   DisplayReference.RIGHT);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.use")),       DisplayReference.USE);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.forward")),        DisplayReference.UP);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.backward")),     DisplayReference.DOWN);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.left")),         DisplayReference.LEFT);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.right")),       DisplayReference.RIGHT);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.use")),           DisplayReference.USE);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.pause")),       DisplayReference.PAUSE);
     }
 
     @Override

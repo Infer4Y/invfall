@@ -17,5 +17,13 @@ public class ClientUtils {
         if (DisplayReference.RIGHT.isDown){
             DisplayReference.renderer.camera.update(1f / (float) (DisplayReference.OPTIMAL_TICKS/2), 0);
         }
+        if (DisplayReference.PAUSE.isDown){
+            DisplayReference.running = false;
+            DisplayReference.renderer.renderEnabled = false;
+            DisplayReference.display.dispose();
+        }
+
+        DisplayReference.locationOverlay.setText("pos : x=" + DisplayReference.renderer.camera.getX() + ", y=" + DisplayReference.renderer.camera.getY());
+
     }
 }

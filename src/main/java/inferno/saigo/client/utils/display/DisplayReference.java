@@ -1,8 +1,10 @@
 package inferno.saigo.client.utils.display;
 
+import inferno.saigo.client.rendering.ObjectRenderingText;
 import inferno.saigo.client.rendering.Renderer;
-import inferno.saigo.client.utils.client.Controller;
+import inferno.saigo.client.utils.client.KeyController;
 import inferno.saigo.client.utils.client.Key;
+import inferno.saigo.client.utils.client.MouseController;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -11,7 +13,8 @@ import java.awt.image.BufferedImage;
 public class DisplayReference {
     public static boolean running = true;
     public static Display display;
-    public static Controller controller;
+    public static KeyController key_controller;
+    public static MouseController mouse_controller;
     public static Renderer renderer;
 
     public static final long NANOSECOND        = 1000000000;
@@ -19,6 +22,9 @@ public class DisplayReference {
     public static final double OPTIMAL_TIME    = NANOSECOND / OPTIMAL_TICKS;
 
     public static int FPS;
+    public static ObjectRenderingText fpsOverlay;
+
+    public static ObjectRenderingText locationOverlay;
 
     public static long last_loop_time = System.nanoTime();
     public static long current_time;
@@ -37,4 +43,5 @@ public class DisplayReference {
     public static Key DOWN = new Key();
     public static Key RIGHT = new Key();
     public static Key USE = new Key();
+    public static Key PAUSE = new Key();
 }

@@ -13,10 +13,15 @@ public class DisplayThread extends Thread{
         while(!Thread.currentThread().isInterrupted() && DisplayReference.running) {
             DisplayUtils.render();
 
-            DisplayReference.controller.init();
+            DisplayReference.key_controller.init();
 
             if (System.currentTimeMillis() - DisplayReference.second_timer > 1000) {
                 DisplayReference.second_timer += 1000;
+
+                if ( DisplayReference.fpsOverlay != null) {
+                    DisplayReference.fpsOverlay.setText("fps : " + DisplayReference.FPS);
+                }
+
                 System.out.print(DisplayReference.FPS + "\n");
                 DisplayReference.FPS = 0;
             }

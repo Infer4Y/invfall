@@ -17,7 +17,7 @@ public class MapTestLoading {
                 TileData t = new TileData();
                 t.x = i;
                 t.y = j;
-                t.tile = Tiles.TILE;
+                t.tile = (i % 8 == 0) ? Tiles.TILE : (j % 7 == 0) ? Tiles.DIRT : Tiles.PLANKS;
                 map.tiles.add(t);
             }
         }

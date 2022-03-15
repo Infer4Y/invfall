@@ -8,7 +8,8 @@ import inferno.saigo.client.configuration.ClientSettings;
 import inferno.saigo.client.rendering.*;
 import inferno.saigo.client.threading.CommonThread;
 import inferno.saigo.client.threading.DisplayThread;
-import inferno.saigo.client.utils.client.Controller;
+import inferno.saigo.client.utils.client.KeyController;
+import inferno.saigo.client.utils.client.MouseController;
 import inferno.saigo.client.utils.display.Display;
 import inferno.saigo.client.utils.display.DisplayReference;
 import inferno.saigo.common.configuration.Settings;
@@ -20,6 +21,7 @@ import inferno.saigo.common.maps.MapSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class GameSetup {
     public static void preInitialization(){
@@ -36,13 +38,18 @@ public class GameSetup {
 
         // Window setup
         DisplayReference.display = new Display("Test", Integer.parseInt(Settings.getProperty("width")), Integer.parseInt(Settings.getProperty("height")));
-        DisplayReference.controller = new Controller();
-        DisplayReference.display.getCanvas().addKeyListener(DisplayReference.controller);
+        DisplayReference.key_controller = new KeyController();
+        DisplayReference.mouse_controller = new MouseController();
+        DisplayReference.display.getCanvas().addKeyListener(DisplayReference.key_controller);
+        DisplayReference.display.getCanvas().addMouseListener(DisplayReference.mouse_controller);
         DisplayReference.display.getCanvas().requestFocus();
 
         //Renderer setup
         DisplayReference.renderer = new Renderer();
         DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/7;
+
+        DisplayReference.renderer.add(2, DisplayReference.fpsOverlay = new ObjectRenderingText("fps : 0", 8,28));
+        DisplayReference.renderer.add(2, DisplayReference.locationOverlay = new ObjectRenderingText("pos : 0, 0", 8,52));
 
         // Thread setup
         new DisplayThread(Main.INSTANCE, "Display0").start();
@@ -58,12 +65,12 @@ public class GameSetup {
         Textures.init();
         Fonts.init();
 
-        map = MapSave.loadMapJar(new ResourceLocation("maps/test_map.json"));
+        map = MapSave.loadMapJar(new ResourceLocation("maps/test_map_1.json"));
 
-        map.tiles.forEach(tile -> DisplayReference.renderer.add(0, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
+        Objects.requireNonNull(map).tiles.forEach(tile -> DisplayReference.renderer.add(0, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
 
         DisplayReference.renderer.add(2, new ObjectRenderingTexture(Textures.getTexture("crosshair")));
 
-        DisplayReference.renderer.render_enabled = true;
+        DisplayReference.renderer.renderEnabled = true;
     }
 }
