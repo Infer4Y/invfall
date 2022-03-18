@@ -9,6 +9,9 @@ public class Tiles {
 
     public static final Tile BLACK_TILE = new Tile("black_tile");
     public static final Tile BRICK = new Tile("brick");
+    public static final Tile CORRUPTION = new Tile("corruption");
+    public static final Tile CORRUPTION_MAJOR = new Tile("corruption_major");
+    public static final Tile CORRUPTION_MINOR = new Tile("corruption_minor");
     public static final Tile DIAG_BRICK_ONE = new Tile("diag_brick_one");
     public static final Tile DIAG_BRICK_TWO = new Tile("diag_brick_two");
     public static final Tile DIRT = new Tile("dirt");
@@ -23,6 +26,7 @@ public class Tiles {
     public static final Tile STONE = new Tile("stone");
     public static final Tile TILE = new Tile("tile");
     public static final Tile WALL = new Tile("wall");
+    public static final Tile WARNING = new Tile("warning");
 
     public static void init(){
         register(TILE);
@@ -32,6 +36,8 @@ public class Tiles {
         register(PAINTING_ONE, PAINTING_TWO, PAINTING_THREE);
         register(LOG, LEAVES, PLANKS, DIRT, STONE, RUBY_TILE, PLACEHOLDER);
         register(DIAG_BRICK_ONE, DIAG_BRICK_TWO);
+        register(WARNING);
+        register(CORRUPTION,CORRUPTION_MAJOR,CORRUPTION_MINOR);
     }
 
     public static Tile getTile(String name) {

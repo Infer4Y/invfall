@@ -1,12 +1,9 @@
 package inferno.saigo.client.utils.display;
 
-import inferno.saigo.client.utils.display.DisplayReference;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 public class Display extends JFrame {
     private final Canvas canvas = new Canvas();

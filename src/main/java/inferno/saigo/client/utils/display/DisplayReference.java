@@ -1,10 +1,10 @@
 package inferno.saigo.client.utils.display;
 
-import inferno.saigo.client.rendering.ObjectRenderingText;
-import inferno.saigo.client.rendering.Renderer;
+import inferno.saigo.client.rendering.*;
 import inferno.saigo.client.utils.client.KeyController;
 import inferno.saigo.client.utils.client.Key;
 import inferno.saigo.client.utils.client.MouseController;
+import inferno.saigo.common.maps.MapWorld;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -26,6 +26,14 @@ public class DisplayReference {
 
     public static ObjectRenderingText locationOverlay;
 
+    public static ObjectRenderingMovementInfo controlsOverlay;
+    public static ObjectRenderingMovementInfo mouseOverlay;
+
+    public static ObjectRenderingPlayer player;
+    public static ObjectRenderingItemForPlayer playerHand;
+
+    public static MapWorld world;
+
     public static long last_loop_time = System.nanoTime();
     public static long current_time;
     public static double delta_time;
@@ -34,6 +42,7 @@ public class DisplayReference {
     public static BufferStrategy buffer_strategy = null;
 
     public static BufferedImage view;
+    public static int viewScale = 2;
 
     public static GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static GraphicsConfiguration defaultConfiguration = localGraphicsEnvironment.getDefaultScreenDevice().getDefaultConfiguration();
@@ -44,4 +53,8 @@ public class DisplayReference {
     public static Key RIGHT = new Key();
     public static Key USE = new Key();
     public static Key PAUSE = new Key();
+    public static Key DEBUG = new Key();
+    public static Key MAP = new Key();
+    public static Key SPEECH = new Key();
+    public static Key INVENTORY = new Key();
 }

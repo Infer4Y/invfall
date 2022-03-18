@@ -1,5 +1,7 @@
 package inferno.saigo.client.assets;
 
+import inferno.saigo.common.entities.Entity;
+import inferno.saigo.common.init.Entities;
 import inferno.saigo.common.init.Items;
 import inferno.saigo.common.init.Tiles;
 import inferno.saigo.common.items.Item;
@@ -15,10 +17,12 @@ public class Textures {
     public static void init(){
         {
             TEXTURE_MAP.put("placeholder", new Texture(new ResourceLocation("textures/placeholder.png")));
-            TEXTURE_MAP.put("crosshair", new Texture(new ResourceLocation("textures/gui/crosshair.png")));
+            TEXTURE_MAP.put("crosshair", new Texture(new ResourceLocation("textures/entities/player.png")));
+            TEXTURE_MAP.put("cursor", new Texture(new ResourceLocation("textures/gui/cursor.png")));
         }
         Tiles.getTiles().values().forEach(Textures::registerTexture);
         Items.getItems().values().forEach(Textures::registerTexture);
+        Entities.getEntities().values().forEach(Textures::registerTexture);
     }
 
     public static void registerTexture(Tile tile) {
@@ -33,6 +37,10 @@ public class Textures {
 
     public static void registerTexture(ItemIngot item) {
         TEXTURE_MAP.put(item.toString(), new Texture(ResourceLoader.receiveImagePath(item)));
+    }
+
+    public static void registerTexture(Entity entity) {
+        TEXTURE_MAP.put(entity.toString(), new Texture(ResourceLoader.receiveImagePath(entity)));
     }
 
     public static void registerTexture(Item... items){

@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class MapTestLoading {
     public static void main(String... args){
         Map map = new Map();
-        map.width = map.height = 50;
+        map.width = map.height = 100;
         map.tiles = new ArrayList<>();
         for (int i = -map.height/2; i < map.height/2; i++) {
             for (int j = -map.height/2; j < map.width/2; j++) {

@@ -14,7 +14,7 @@ public class Texture {
 
     public Texture(ResourceLocation location) {
         try {
-            this.image = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(location.toString())));
+            this.image = convertToARGB(ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(location.toString()))));
             image.setAccelerationPriority(1);
         } catch (IOException|IllegalArgumentException|NullPointerException e) {
             System.out.println(location + " could not be loaded or is null");
@@ -24,5 +24,15 @@ public class Texture {
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    private BufferedImage convertToARGB(BufferedImage image) {
+        BufferedImage newImage = new BufferedImage(
+                image.getWidth(), image.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
     }
 }

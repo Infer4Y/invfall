@@ -4,7 +4,7 @@
   "tiles": [
     {
       "tile": {
-        "registry_name": "plank",
+        "registry_name": "corruption",
         "domain": "saigo"
       },
       "x": -25,
@@ -396,7 +396,7 @@
     },
     {
       "tile": {
-        "registry_name": "plank",
+        "registry_name": "corruption_minor",
         "domain": "saigo"
       },
       "x": -25,
@@ -10204,7 +10204,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "",
         "domain": "saigo"
       },
       "x": 0,
@@ -19604,7 +19604,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "corruption_minor",
         "domain": "saigo"
       },
       "x": 24,
@@ -19996,7 +19996,7 @@
     },
     {
       "tile": {
-        "registry_name": "tile",
+        "registry_name": "corruption",
         "domain": "saigo"
       },
       "x": 24,
