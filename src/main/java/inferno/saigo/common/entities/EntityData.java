@@ -8,10 +8,11 @@ import java.util.UUID;
 public class EntityData {
     public Entity entity;
     public UUID uuid;
-    public float x, y, age;
+    public float x, y, age = 0;
     public Shape bounds;
 
     public void update(MapWorld world){
+        entity.onUpdate(world, this);
         if (shouldDie()){
             onDeath(world);
         }
@@ -33,9 +34,8 @@ public class EntityData {
         return entity;
     }
 
-    public EntityData setEntity(Entity entity) {
+    public void setEntity(Entity entity) {
         this.entity = entity;
-        return this;
     }
 
     public UUID getUuid() {
@@ -84,8 +84,8 @@ public class EntityData {
         return this;
     }
 
-    public void onCollision(EntityData data){
-        entity.onCollision(data);
+    public void onCollision(MapWorld world,EntityData data){
+        entity.onCollision(world, data);
     }
 
     public boolean shouldDie(){
@@ -93,6 +93,6 @@ public class EntityData {
     }
 
     public void onDeath(MapWorld world){
-        world.removeEntity(this);
+        world.removeEntity(world.getEntity(this.uuid));
     }
 }

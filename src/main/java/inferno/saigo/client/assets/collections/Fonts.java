@@ -1,4 +1,4 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.collections;
 
 import inferno.saigo.client.Main;
 import inferno.saigo.client.utils.display.DisplayReference;

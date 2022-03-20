@@ -1,11 +1,12 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.objects;
 
 import inferno.saigo.client.Main;
-import inferno.saigo.client.utils.display.DisplayReference;
+import inferno.saigo.client.assets.collections.Textures;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -27,12 +28,18 @@ public class Texture {
     }
 
     private BufferedImage convertToARGB(BufferedImage image) {
-        BufferedImage newImage = new BufferedImage(
-                image.getWidth(), image.getHeight(),
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = newImage.createGraphics();
-        g.drawImage(image, 0, 0, null);
-        g.dispose();
+        GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment ();
+        GraphicsDevice defaultScreenDevice = localGraphicsEnvironment.getDefaultScreenDevice ();
+        GraphicsConfiguration defaultConfiguration = defaultScreenDevice.getDefaultConfiguration ();
+
+        BufferedImage newImage = defaultConfiguration.createCompatibleImage(
+                image.getWidth(), image.getHeight(), image.getTransparency());
+
+        Graphics2D newImageGraphics = newImage.createGraphics();
+
+        newImageGraphics.drawImage(image, 0, 0, null);
+        newImageGraphics.dispose();
+
         return newImage;
     }
 }

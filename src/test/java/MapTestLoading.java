@@ -1,11 +1,10 @@
-import inferno.saigo.client.assets.ResourceLocation;
+import inferno.saigo.client.assets.objects.ResourceLocation;
 import inferno.saigo.common.init.Tiles;
 import inferno.saigo.common.maps.Map;
 import inferno.saigo.common.maps.MapSave;
 import inferno.saigo.common.tiles.TileData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MapTestLoading {
     public static void main(String... args){

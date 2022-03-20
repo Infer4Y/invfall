@@ -1,8 +1,8 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.objects;
 
 public class ResourceLocation {
     private String domain = "saigo";
-    private String path;
+    private final String path;
 
     public ResourceLocation(String domain, String path) {
         this.domain = domain;

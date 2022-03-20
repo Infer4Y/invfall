@@ -1,5 +1,7 @@
 package inferno.saigo.client.utils.display;
 
+import inferno.saigo.api.plugins.Mod;
+import inferno.saigo.client.assets.loaders.PluginLoader;
 import inferno.saigo.client.rendering.*;
 import inferno.saigo.client.utils.client.KeyController;
 import inferno.saigo.client.utils.client.Key;
@@ -9,6 +11,7 @@ import inferno.saigo.common.maps.MapWorld;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class DisplayReference {
     public static boolean running = true;
@@ -57,4 +60,8 @@ public class DisplayReference {
     public static Key MAP = new Key();
     public static Key SPEECH = new Key();
     public static Key INVENTORY = new Key();
+    public static Key SCREENSHOT = new Key();
+
+    public static PluginLoader pluginLoader;
+    public static ArrayList<Mod> modArrayList = new ArrayList<>();
 }

@@ -56,8 +56,8 @@ public class MouseController implements MouseListener, MouseMotionListener, Mous
         lastY = currentY;
         currentX = e.getX();
         currentY = e.getY();
-        double dx = currentX - ((float) DisplayReference.view.getWidth())/DisplayReference.viewScale/2.0;
-        double dy = currentY - ((float) DisplayReference.view.getHeight())/DisplayReference.viewScale/2.0;
+        double dx = currentX - ((float) DisplayReference.display.getWidth())/2.0;
+        double dy = currentY - ((float) DisplayReference.display.getHeight())/2.0;
         mouseRotationFromCenter = Math.atan2(dy, dx) - Math.PI / 2;
     }
 
@@ -67,8 +67,8 @@ public class MouseController implements MouseListener, MouseMotionListener, Mous
         lastY = currentY;
         currentX = e.getX();
         currentY = e.getY();
-        double dx = currentX - ((float) DisplayReference.view.getWidth())/DisplayReference.viewScale/2.0;
-        double dy = currentY - ((float) DisplayReference.view.getHeight())/DisplayReference.viewScale/2.0;
+        double dx = currentX - ((float) DisplayReference.display.getWidth())/2.0;
+        double dy = currentY - ((float) DisplayReference.display.getHeight())/2.0;
         mouseRotationFromCenter = Math.atan2(dy, dx) - Math.PI / 2;
     }
 

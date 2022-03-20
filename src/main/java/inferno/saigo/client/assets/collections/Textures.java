@@ -1,5 +1,8 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.collections;
 
+import inferno.saigo.client.assets.objects.ResourceLocation;
+import inferno.saigo.client.assets.objects.Texture;
+import inferno.saigo.client.assets.loaders.ResourceLoader;
 import inferno.saigo.common.entities.Entity;
 import inferno.saigo.common.init.Entities;
 import inferno.saigo.common.init.Items;

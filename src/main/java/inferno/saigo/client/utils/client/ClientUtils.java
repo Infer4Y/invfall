@@ -1,16 +1,20 @@
 package inferno.saigo.client.utils.client;
 
 
-import inferno.saigo.client.assets.Sounds;
+import inferno.saigo.client.assets.collections.Sounds;
+import inferno.saigo.client.rendering.ObjectRenderingEntityProjectile;
 import inferno.saigo.client.utils.display.DisplayReference;
 import inferno.saigo.common.configuration.Settings;
+import inferno.saigo.common.entities.EntityProjectile;
+import inferno.saigo.common.init.Entities;
 import inferno.saigo.common.init.Items;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class ClientUtils {
-    public static boolean debugReady = true, mouse_ready = true, mouse2_ready = true;
+    public static boolean debugReady = true, mouse_ready = true, mouse2_ready = true, shouldScreenshot_ready = true;
+    public static boolean shouldScreenshot;
     static float speed = 1f / (float) (DisplayReference.OPTIMAL_TICKS/2), movementTimeHeld = 0f;
     static int lastMouseX, lastMouseY;
     static double lastMouseRotation;
@@ -60,10 +64,29 @@ public class ClientUtils {
             debugReady = true;
         }
 
+        if (DisplayReference.SCREENSHOT.isDown && shouldScreenshot_ready){
+            shouldScreenshot = true;
+            shouldScreenshot_ready = false;
+        }
+
+        if (!DisplayReference.SCREENSHOT.isDown && !shouldScreenshot_ready){
+            shouldScreenshot_ready = true;
+        }
+
         DisplayReference.locationOverlay.setText("pos : x= " + format(DisplayReference.renderer.camera.getX()) + ", y= " + format(DisplayReference.renderer.camera.getY()));
 
         if (DisplayReference.mouse_controller.isMouseLeftDown() && mouse_ready){
             Sounds.playSound(Sounds.RAIN_DROP);
+
+            float projectileX = (float) (DisplayReference.renderer.camera.getX() + 2*Math.sin(-lastMouseRotation));
+            float projectileY = (float) (DisplayReference.renderer.camera.getY() + 2*Math.cos(-lastMouseRotation));
+
+            EntityProjectile.EntityProjectileData rayProjectile = Entities.RAY.createProjectile(projectileX, projectileY, (float) (speed * Math.sin(-lastMouseRotation)), (float) (speed* Math.cos(-lastMouseRotation)), Entities.RAY);
+
+            DisplayReference.world.addEntity(rayProjectile);
+
+            DisplayReference.renderer.addPool(1, new ObjectRenderingEntityProjectile(rayProjectile));
+
             mouse_ready = false;
         }
 
@@ -83,6 +106,7 @@ public class ClientUtils {
         lastMouseX = DisplayReference.mouse_controller.currentX;
         lastMouseY = DisplayReference.mouse_controller.currentY;
         lastMouseRotation = DisplayReference.mouse_controller.mouseRotationFromCenter;
+
     }
 
     static DecimalFormat df = new DecimalFormat("#.###");
@@ -94,5 +118,9 @@ public class ClientUtils {
 
     public static float getMovementProgress() {
         return movementTimeHeld;
+    }
+
+    public static void updateWorld(double delta_time) {
+        DisplayReference.world.update();
     }
 }

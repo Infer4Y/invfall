@@ -1,6 +1,6 @@
 package inferno.saigo.client.rendering;
 
-import inferno.saigo.client.assets.Fonts;
+import inferno.saigo.client.assets.collections.Fonts;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;

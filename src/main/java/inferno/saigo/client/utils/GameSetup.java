@@ -1,14 +1,18 @@
 package inferno.saigo.client.utils;
 
+import inferno.saigo.api.plugins.Mod;
+import inferno.saigo.api.plugins.PluginFactory;
 import inferno.saigo.client.Main;
-import inferno.saigo.client.assets.Fonts;
-import inferno.saigo.client.assets.ResourceLocation;
-import inferno.saigo.client.assets.Sounds;
-import inferno.saigo.client.assets.Textures;
+import inferno.saigo.client.assets.collections.Fonts;
+import inferno.saigo.client.assets.loaders.PluginLoader;
+import inferno.saigo.client.assets.objects.ResourceLocation;
+import inferno.saigo.client.assets.collections.Sounds;
+import inferno.saigo.client.assets.collections.Textures;
 import inferno.saigo.client.configuration.ClientSettings;
 import inferno.saigo.client.rendering.*;
 import inferno.saigo.client.threading.CommonThread;
 import inferno.saigo.client.threading.DisplayThread;
+import inferno.saigo.client.threading.WorldThread;
 import inferno.saigo.client.utils.client.KeyController;
 import inferno.saigo.client.utils.client.MouseController;
 import inferno.saigo.client.utils.display.Display;
@@ -18,18 +22,20 @@ import inferno.saigo.common.init.Entities;
 import inferno.saigo.common.init.Items;
 import inferno.saigo.common.init.Recipes;
 import inferno.saigo.common.init.Tiles;
-import inferno.saigo.common.maps.Map;
 import inferno.saigo.common.maps.MapSave;
 import inferno.saigo.common.maps.MapWorld;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 public class GameSetup {
     public static void preInitialization(){
         //Settings
         ClientSettings.loadSettings();
+        DisplayReference.pluginLoader = new PluginLoader(Settings.getPluginDir());
+
+        DisplayReference.pluginLoader.loadPlugins();
+        DisplayReference.pluginLoader.getPluginFactories().forEach((s, pluginFactory) -> DisplayReference.modArrayList.add(pluginFactory.build()));
 
         // Image buffer setup
         DisplayReference.view = new BufferedImage(Integer.parseInt(Settings.getProperty("width"))  * DisplayReference.viewScale, Integer.parseInt(Settings.getProperty("height")) * DisplayReference.viewScale, BufferedImage.TYPE_4BYTE_ABGR);
@@ -63,14 +69,19 @@ public class GameSetup {
             DisplayReference.controlsOverlay.shouldRender = true;
         }
 
+        DisplayReference.modArrayList.forEach(Mod::preInit);
 
         // Thread setup
         new DisplayThread(Main.INSTANCE, "Display0").start();
         new CommonThread(Main.INSTANCE, "Common0").start();
+        new WorldThread(Main.INSTANCE, "Common0-World").start();
     }
 
     public static void initialization(){
         DisplayReference.world = new MapWorld();
+
+
+        DisplayReference.modArrayList.forEach(Mod::init);
 
         Items.init();
         Tiles.init();
@@ -83,15 +94,19 @@ public class GameSetup {
         DisplayReference.world.setMap(MapSave.loadMapJar(new ResourceLocation("maps/test_map_1.json")));
 
         DisplayReference.world.getMap().tiles.forEach(tile -> DisplayReference.renderer.add(0, new ObjectRenderingTile(tile.tile,tile.x, tile.y)));
-        DisplayReference.world.getEntities().forEach(entityData -> DisplayReference.renderer.add(0, new ObjectRenderingEntity(entityData.entity, (int) entityData.x, (int) entityData.y)));
+        DisplayReference.world.getEntities().values().forEach(entityData -> DisplayReference.renderer.add(1, new ObjectRenderingEntity(entityData)));
 
         DisplayReference.renderer.add(2, DisplayReference.player = new ObjectRenderingPlayer(Textures.getTexture("crosshair")));
-        DisplayReference.renderer.add(2, DisplayReference.playerHand = new ObjectRenderingItemForPlayer(Textures.getTexture("saigo:items.shovel")));
+        DisplayReference.renderer.add(2, DisplayReference.playerHand = new ObjectRenderingItemForPlayer(Textures.getTexture("saigo:items.ray_blaster")));
 
         DisplayReference.renderer.renderEnabled = true;
 
         Sounds.playSound(Sounds.SONG_THREE);
 
         DisplayReference.display.setCursor(DisplayReference.display.getToolkit().createCustomCursor(Textures.getTexture("cursor").getImage(), new Point(0, 0), "null"));
+    }
+
+    public static void postInitialization(){
+        DisplayReference.modArrayList.forEach(Mod::postInit);
     }
 }

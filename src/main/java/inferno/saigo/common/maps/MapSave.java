@@ -3,10 +3,11 @@ package inferno.saigo.common.maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import inferno.saigo.client.Main;
-import inferno.saigo.client.assets.ResourceLocation;
+import inferno.saigo.client.assets.objects.ResourceLocation;
 import inferno.saigo.common.configuration.Settings;
 
 import java.io.*;
+import java.util.Objects;
 
 public class MapSave {
     private static final Gson parser = new Gson();
@@ -26,7 +27,7 @@ public class MapSave {
 
     public static void saveMapJar(ResourceLocation location, Map map) {
 
-        try (Writer writer = new OutputStreamWriter(Main.class.getClassLoader().getResource(location.toString()).openConnection().getOutputStream())) {
+        try (Writer writer = new OutputStreamWriter(Objects.requireNonNull(Main.class.getClassLoader().getResource(location.toString())).openConnection().getOutputStream())) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(map, writer);
         } catch (IOException e) {
@@ -58,9 +59,9 @@ public class MapSave {
     }
 
     public static Map loadMapJar(ResourceLocation location) {
-        Map temp_map = null;
+        Map temp_map;
 
-        try (Reader reader = new InputStreamReader(Main.class.getClassLoader().getResourceAsStream(location.toString()))) {
+        try (Reader reader = new InputStreamReader(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(location.toString())))) {
 
             // Convert JSON File to Java Object
             temp_map = parser.fromJson(reader, Map.class);

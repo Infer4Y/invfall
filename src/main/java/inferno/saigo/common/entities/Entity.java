@@ -1,6 +1,7 @@
 package inferno.saigo.common.entities;
 
 import inferno.saigo.common.configuration.Settings;
+import inferno.saigo.common.maps.MapWorld;
 
 public class Entity {
     private final String registryName;
@@ -34,13 +35,11 @@ public class Entity {
         return maxAge;
     }
 
-    public Entity setMaxAge(int maxAge) {
+    public void setMaxAge(int maxAge) {
         this.maxAge = maxAge;
-
-        return this;
     }
 
-    public void onCollision(EntityData data) {
+    public void onCollision(MapWorld world, EntityData data) {}
 
-    }
+    public void onUpdate(MapWorld world, EntityData self){}
 }

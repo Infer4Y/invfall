@@ -3,8 +3,8 @@ package inferno.saigo.client.threading;
 import inferno.saigo.client.utils.client.ClientUtils;
 import inferno.saigo.client.utils.display.DisplayReference;
 
-public class CommonThread extends Thread{
-    public CommonThread(Runnable runnable, String name) {
+public class WorldThread extends Thread{
+    public WorldThread(Runnable runnable, String name) {
         super(runnable, name);
     }
 
@@ -17,7 +17,7 @@ public class CommonThread extends Thread{
                 DisplayReference.last_loop_time = DisplayReference.current_time;
 
                 while (DisplayReference.delta_time >= 1) {
-                    ClientUtils.update(DisplayReference.delta_time);
+                    ClientUtils.updateWorld(DisplayReference.delta_time);
                     DisplayReference.delta_time--;
                 }
             } catch (Exception ignored){}

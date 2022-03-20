@@ -13,9 +13,10 @@ public class Items {
     public static final Item STICK = new Item("stick");
     public static final Item PICKAXE = new Item("pickaxe");
     public static final Item SHOVEL = new Item("shovel");
+    public static final Item RAY_BLASTER = new Item("ray_blaster");
 
     public static void init(){
-        register(COAL, RUBY, DIAMOND, INGOT, STICK, PICKAXE, SHOVEL);
+        register(COAL, RUBY, DIAMOND, INGOT, STICK, PICKAXE, SHOVEL, RAY_BLASTER);
     }
 
     public static Item getItem(String name) {

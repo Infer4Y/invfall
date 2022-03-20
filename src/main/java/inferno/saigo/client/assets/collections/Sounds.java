@@ -1,7 +1,8 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.collections;
 
 import inferno.saigo.client.Main;
-import inferno.saigo.client.configuration.ClientSettings;
+import inferno.saigo.client.assets.objects.Sound;
+import inferno.saigo.client.assets.loaders.ResourceLoader;
 import inferno.saigo.common.configuration.Settings;
 
 import javax.sound.sampled.*;

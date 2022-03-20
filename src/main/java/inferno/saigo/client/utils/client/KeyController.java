@@ -13,16 +13,17 @@ public class KeyController implements KeyListener {
     private final Key dummy = new Key();
 
     public void init() {
-        bind(Integer.parseInt(Settings.getProperty("key_binds.forward")),                DisplayReference.UP);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.backward")),             DisplayReference.DOWN);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.left")),                 DisplayReference.LEFT);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.right")),               DisplayReference.RIGHT);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.use")),                   DisplayReference.USE);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.pause")),               DisplayReference.PAUSE);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.debug")),               DisplayReference.DEBUG);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.map")),                   DisplayReference.MAP);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.speech")),             DisplayReference.SPEECH);
-        bind(Integer.parseInt(Settings.getProperty("key_binds.inventory")),       DisplayReference.INVENTORY);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.forward")),                          DisplayReference.UP);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.backward")),                       DisplayReference.DOWN);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.left")),                           DisplayReference.LEFT);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.right")),                         DisplayReference.RIGHT);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.use")),                             DisplayReference.USE);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.pause")),                         DisplayReference.PAUSE);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.debug")),                         DisplayReference.DEBUG);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.screenshot")),               DisplayReference.SCREENSHOT);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.map")),                             DisplayReference.MAP);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.speech")),                       DisplayReference.SPEECH);
+        bind(Integer.parseInt(Settings.getProperty("key_binds.inventory")),                 DisplayReference.INVENTORY);
     }
 
     @Override

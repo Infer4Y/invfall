@@ -1,4 +1,4 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.objects;
 
 import inferno.saigo.common.configuration.Settings;
 

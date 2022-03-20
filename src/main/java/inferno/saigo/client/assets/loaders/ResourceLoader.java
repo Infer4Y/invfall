@@ -1,7 +1,10 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.loaders;
 
 import com.google.gson.Gson;
 import inferno.saigo.client.Main;
+import inferno.saigo.client.assets.objects.Model;
+import inferno.saigo.client.assets.objects.ResourceLocation;
+import inferno.saigo.client.assets.objects.Sound;
 import inferno.saigo.common.entities.Entity;
 import inferno.saigo.common.items.Item;
 import inferno.saigo.common.tiles.Tile;

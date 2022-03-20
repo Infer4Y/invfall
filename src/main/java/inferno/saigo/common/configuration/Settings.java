@@ -6,7 +6,7 @@ import java.util.Properties;
 public class Settings {
     public static final Properties properties = new Properties();
     public static final String name = "Saigo";
-    public static final String version = "0.0.0";
+    public static final String version = "1.0.0-Test";
 
     public static void default_properties(){
     }
@@ -39,6 +39,14 @@ public class Settings {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static File getHomeDir() {
+        return new File(System.getProperty("user.home")+File.separator+name);
+    }
+
+    public static File getPluginDir() {
+        return new File(System.getProperty("user.home")+File.separator+name+File.separator+"mods");
     }
 }
 

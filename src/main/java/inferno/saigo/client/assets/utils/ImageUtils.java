@@ -1,9 +1,10 @@
-package inferno.saigo.client.assets;
+package inferno.saigo.client.assets.utils;
 
 import inferno.saigo.client.utils.display.DisplayReference;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 
 public class ImageUtils {
     public static void drawScaledImage(Image image, Component canvas, Graphics graphics) {
@@ -48,7 +49,7 @@ public class ImageUtils {
         graphics.drawImage(image, x1, y1, x2, y2, 0, 0, image_width, image_height, null);
     }
 
-    public static BufferedImage resize(BufferedImage buffered_image, int target_width, int target_height) {
+    public static VolatileImage resize(BufferedImage buffered_image, int target_width, int target_height) {
 
         double  scale_x = (double) target_width / buffered_image.getWidth(),
                 scale_y = (double) target_height / buffered_image.getHeight(),
@@ -60,7 +61,7 @@ public class ImageUtils {
         Image temporary_scaled_instance = buffered_image.getScaledInstance(image_width, image_height, Image.SCALE_DEFAULT);
 
         //BufferedImage resized_buffered_image = new BufferedImage(image_width, image_height, buffered_image.getType());
-        BufferedImage resized_buffered_image = DisplayReference.defaultConfiguration.createCompatibleImage(image_width, image_height, Transparency.TRANSLUCENT);
+        VolatileImage resized_buffered_image = DisplayReference.defaultConfiguration.createCompatibleVolatileImage(image_width, image_height, Transparency.TRANSLUCENT);
         resized_buffered_image.setAccelerationPriority(1);
 
         Graphics2D graphics2D = resized_buffered_image.createGraphics();

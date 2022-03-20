@@ -1,7 +1,7 @@
 package inferno.saigo.client.rendering;
 
-import inferno.saigo.client.assets.Texture;
-import inferno.saigo.client.assets.Textures;
+import inferno.saigo.client.assets.objects.Texture;
+import inferno.saigo.client.assets.collections.Textures;
 import inferno.saigo.client.utils.display.DisplayReference;
 import inferno.saigo.common.items.Item;
 
@@ -38,8 +38,7 @@ public class ObjectRenderingItemForPlayer extends ObjectRendering {
         return texture;
     }
 
-    public ObjectRenderingItemForPlayer setTexture(Item item) {
+    public void setTexture(Item item) {
         this.texture = Textures.getTexture(item.toString());
-        return this;
     }
 }

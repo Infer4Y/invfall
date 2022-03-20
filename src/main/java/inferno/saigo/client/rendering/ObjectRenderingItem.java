@@ -1,7 +1,7 @@
 package inferno.saigo.client.rendering;
 
-import inferno.saigo.client.assets.Texture;
-import inferno.saigo.client.assets.Textures;
+import inferno.saigo.client.assets.objects.Texture;
+import inferno.saigo.client.assets.collections.Textures;
 import inferno.saigo.common.items.Item;
 
 import java.awt.*;

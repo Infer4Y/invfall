@@ -2,39 +2,38 @@ package inferno.saigo.common.maps;
 
 import inferno.saigo.common.entities.EntityData;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MapWorld {
     private Map map;
-    private final LinkedList<EntityData> entityList = new LinkedList<>();
-    private LinkedList<EntityData> entityDataList = new LinkedList<>();
+    private final ConcurrentHashMap<UUID,EntityData> entityList = new ConcurrentHashMap<>();
 
-    public void update(){
-        entityList.forEach(entity -> entity.update(this));
-        entityList.forEach(entity -> {
-            entityDataList = new LinkedList<>(entityList);
-            entityList.stream().filter(targetEntity -> {
-                entityDataList.remove(entity);
-                return entity.getBounds().intersects(targetEntity.getBounds().getBounds());
-            }).forEach( collided -> collided.onCollision(entity));
-        });
+    public synchronized void update(){
+        entityList.values().forEach(current -> current.update(this));
     }
 
     public Map getMap() {
         return map;
     }
 
-    public MapWorld setMap(Map map) {
+    public void setMap(Map map) {
         this.map = map;
-        return this;
     }
 
-    public void removeEntity(EntityData entityData){
-        entityList.remove(entityData);
+    public synchronized void removeEntity(EntityData entityData){
+        entityList.remove(entityData.uuid);
     }
 
-    public LinkedList<EntityData> getEntities() {
+    public synchronized ConcurrentHashMap<UUID, EntityData> getEntities() {
         return entityList;
+    }
+
+    public synchronized EntityData getEntity(UUID uuid){
+        return entityList.get(uuid);
+    }
+
+    public synchronized void addEntity(EntityData entityData) {
+        entityList.put(entityData.uuid, entityData);
     }
 }
