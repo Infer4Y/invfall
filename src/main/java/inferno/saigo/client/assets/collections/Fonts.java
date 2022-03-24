@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Fonts {
-    public static Font OPEN_SANS = new Font(Font.SERIF, Font.BOLD, 24);
+    public static Font OPEN_SANS = new Font(Font.SANS_SERIF, Font.BOLD, 24);
     public static Font JETBRAINS_MONO = new Font(Font.MONOSPACED, Font.BOLD, 24);
-    public static Font AUDIO_WIDE = new Font(Font.DIALOG, Font.BOLD, 24);
+    public static Font AUDIO_WIDE = new Font(Font.SANS_SERIF, Font.BOLD, 24);
 
     public static void init (){
         try {
@@ -30,5 +30,6 @@ public class Fonts {
 
         DisplayReference.localGraphicsEnvironment.registerFont(OPEN_SANS);
         DisplayReference.localGraphicsEnvironment.registerFont(JETBRAINS_MONO);
+        DisplayReference.localGraphicsEnvironment.registerFont(AUDIO_WIDE);
     }
 }

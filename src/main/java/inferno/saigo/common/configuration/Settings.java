@@ -6,7 +6,7 @@ import java.util.Properties;
 public class Settings {
     public static final Properties properties = new Properties();
     public static final String name = "Saigo";
-    public static final String version = "1.0.0-Test";
+    public static final String version = "1.0.001-Test";
 
     public static void default_properties(){
     }

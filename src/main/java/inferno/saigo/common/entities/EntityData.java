@@ -3,6 +3,7 @@ package inferno.saigo.common.entities;
 import inferno.saigo.common.maps.MapWorld;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class EntityData {
@@ -13,6 +14,18 @@ public class EntityData {
 
     public void update(MapWorld world){
         entity.onUpdate(world, this);
+
+        ArrayList<UUID> entities = world.getEntities(new Point((int) x, (int) y));
+
+        if (entities.size() > 1){
+            entities.forEach(uuidX -> {
+                EntityData entity = world.getEntity(uuidX);
+                if (entity.uuid != uuid){
+                    this.onCollision(world, entity);
+                }
+            });
+        }
+
         if (shouldDie()){
             onDeath(world);
         }
@@ -84,7 +97,7 @@ public class EntityData {
         return this;
     }
 
-    public void onCollision(MapWorld world,EntityData data){
+    public void onCollision(MapWorld world, EntityData data){
         entity.onCollision(world, data);
     }
 

@@ -1,7 +1,6 @@
 package inferno.saigo.client.utils;
 
 import inferno.saigo.api.plugins.Mod;
-import inferno.saigo.api.plugins.PluginFactory;
 import inferno.saigo.client.Main;
 import inferno.saigo.client.assets.collections.Fonts;
 import inferno.saigo.client.assets.loaders.PluginLoader;
@@ -35,10 +34,11 @@ public class GameSetup {
         DisplayReference.pluginLoader = new PluginLoader(Settings.getPluginDir());
 
         DisplayReference.pluginLoader.loadPlugins();
-        DisplayReference.pluginLoader.getPluginFactories().forEach((s, pluginFactory) -> DisplayReference.modArrayList.add(pluginFactory.build()));
+
+        DisplayReference.pluginLoader.getPluginFactoriesMap().forEach((s, pluginFactory) -> DisplayReference.modArrayList.add(pluginFactory.build()));
 
         // Image buffer setup
-        DisplayReference.view = new BufferedImage(Integer.parseInt(Settings.getProperty("width"))  * DisplayReference.viewScale, Integer.parseInt(Settings.getProperty("height")) * DisplayReference.viewScale, BufferedImage.TYPE_4BYTE_ABGR);
+        DisplayReference.view = new BufferedImage((int) (Integer.parseInt(Settings.getProperty("width"))  * DisplayReference.viewScale), (int) (Integer.parseInt(Settings.getProperty("height")) * DisplayReference.viewScale), BufferedImage.TYPE_4BYTE_ABGR);
         DisplayReference.view = DisplayReference.defaultConfiguration.createCompatibleImage(
                 DisplayReference.view.getWidth(),
                 DisplayReference.view.getHeight(),
@@ -57,7 +57,7 @@ public class GameSetup {
 
         //Renderer setup
         DisplayReference.renderer = new Renderer();
-        DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/7;
+        DisplayReference.renderer.tileSize = DisplayReference.view.getWidth()/10;
 
         DisplayReference.renderer.add(2, DisplayReference.fpsOverlay = new ObjectRenderingText("fps : 0", 8,28));
         DisplayReference.renderer.add(2, DisplayReference.locationOverlay = new ObjectRenderingText("pos : 0, 0", 8,70));
@@ -80,9 +80,6 @@ public class GameSetup {
     public static void initialization(){
         DisplayReference.world = new MapWorld();
 
-
-        DisplayReference.modArrayList.forEach(Mod::init);
-
         Items.init();
         Tiles.init();
         Entities.init();
@@ -104,6 +101,8 @@ public class GameSetup {
         Sounds.playSound(Sounds.SONG_THREE);
 
         DisplayReference.display.setCursor(DisplayReference.display.getToolkit().createCustomCursor(Textures.getTexture("cursor").getImage(), new Point(0, 0), "null"));
+
+        DisplayReference.modArrayList.forEach(Mod::init);
     }
 
     public static void postInitialization(){

@@ -81,7 +81,7 @@ public class ClientUtils {
             float projectileX = (float) (DisplayReference.renderer.camera.getX() + 2*Math.sin(-lastMouseRotation));
             float projectileY = (float) (DisplayReference.renderer.camera.getY() + 2*Math.cos(-lastMouseRotation));
 
-            EntityProjectile.EntityProjectileData rayProjectile = Entities.RAY.createProjectile(projectileX, projectileY, (float) (speed * Math.sin(-lastMouseRotation)), (float) (speed* Math.cos(-lastMouseRotation)), Entities.RAY);
+            EntityProjectile.EntityProjectileData rayProjectile = Entities.RAY.createProjectile(projectileX, projectileY, (float) (speed * .9f * Math.sin(-lastMouseRotation)), (float) (speed * .9f * Math.cos(-lastMouseRotation)), Entities.RAY);
 
             DisplayReference.world.addEntity(rayProjectile);
 

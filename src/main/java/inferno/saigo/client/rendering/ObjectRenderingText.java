@@ -8,11 +8,17 @@ import java.awt.font.LineMetrics;
 
 public class ObjectRenderingText extends ObjectRendering {
     private String text;
-    private int x, y;
+    private int x, y, width, height;
+    private Font font;
     public boolean shouldRender;
 
     public ObjectRenderingText(String text, int x, int y){
+        this(text, Fonts.AUDIO_WIDE, x, y);
+    }
+
+    public ObjectRenderingText(String text, Font font, int x, int y){
         this.text = text;
+        this.font = font;
         this.x = x;
         this.y = y;
     }
@@ -21,14 +27,15 @@ public class ObjectRenderingText extends ObjectRendering {
     public void render(Graphics2D graphics, int tileSize) {
         if ( !shouldRender ) return;
         graphics.setColor(new Color(0,0,0, 128));
+        Font backUp = graphics.getFont();
 
-        graphics.setFont(Fonts.AUDIO_WIDE);
+        graphics.setFont(getFont());
 
         FontRenderContext context = graphics.getFontRenderContext();
 
-        int textWidth = (int) Fonts.AUDIO_WIDE.getStringBounds(text, context).getWidth();
+        int textWidth = getTextWidth(graphics, context);
 
-        LineMetrics ln = Fonts.AUDIO_WIDE.getLineMetrics(text, context);
+        LineMetrics ln = getFont().getLineMetrics(text, context);
 
         int textHeight = (int) (ln.getAscent() + ln.getDescent());
 
@@ -39,6 +46,11 @@ public class ObjectRenderingText extends ObjectRendering {
         graphics.drawString(text,getX()+4,getY()+6);
 
         graphics.setColor(Color.BLACK);
+
+        graphics.setFont(backUp);
+
+        width = textWidth;
+        height = textHeight;
     }
 
     public int getY() {
@@ -63,5 +75,33 @@ public class ObjectRenderingText extends ObjectRendering {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getTextWidth(Graphics2D graphics, FontRenderContext context){
+        return (int) getFont().getStringBounds(text, context).getWidth();
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }

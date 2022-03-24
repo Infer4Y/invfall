@@ -1,16 +1,14 @@
 package inferno.saigo.client.assets.loaders;
-import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ServiceLoader;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import inferno.saigo.api.plugins.Plugin;
 import inferno.saigo.api.plugins.PluginFactory;
@@ -21,7 +19,7 @@ public class PluginLoader {
     private final File pluginsDir;
     private final AtomicBoolean loading = new AtomicBoolean();
 
-    public PluginLoader(final File pluginsDir) {
+    public PluginLoader(File pluginsDir) {
         this.pluginsDir = pluginsDir;
     }
 
@@ -32,7 +30,8 @@ public class PluginLoader {
         }
 
         if (loading.compareAndSet(false, true)) {
-            final File[] files = requireNonNull(pluginsDir.listFiles());
+            System.out.println("Plugin Loading started. Plugin dir found: " + pluginsDir);
+            final File[] files = Objects.requireNonNull(pluginsDir.listFiles());
             for (File pluginDir : files) {
                 if (pluginDir.isDirectory()) {
                     loadPlugin(pluginDir);
@@ -58,11 +57,13 @@ public class PluginLoader {
 
     private void installPlugin(final Plugin plugin) {
         System.out.println("Installing plugin: " + plugin.getClass().getName());
-        plugin.getPluginFactories().forEach(pluginFactory -> pluginFactoryMap.put(pluginFactory.domain(), pluginFactory));
+        for (PluginFactory f : plugin.getPluginFactories()) {
+            pluginFactoryMap.put(f.name(), f);
+        }
     }
 
     private URLClassLoader createPluginClassLoader(File dir) {
-        final URL[] urls = Arrays.stream(Optional.of(requireNonNull(dir.listFiles())).orElse(new File[]{}))
+        final URL[] urls = Arrays.stream(Optional.of(dir.listFiles()).orElse(new File[]{}))
                 .sorted()
                 .map(File::toURI)
                 .map(this::toUrl)
@@ -71,7 +72,7 @@ public class PluginLoader {
         return new PluginClassLoader(urls, getClass().getClassLoader());
     }
 
-    private URL toUrl(final URI uri) {
+    private URL toUrl(URI uri) {
         try {
             return uri.toURL();
         } catch (MalformedURLException e) {
@@ -83,7 +84,7 @@ public class PluginLoader {
         return pluginFactoryMap.get(name);
     }
 
-    public HashMap<String, PluginFactory> getPluginFactories(){
+    public HashMap<String, PluginFactory> getPluginFactoriesMap(){
         return pluginFactoryMap;
     }
 }

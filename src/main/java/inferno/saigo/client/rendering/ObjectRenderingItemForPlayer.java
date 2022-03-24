@@ -16,10 +16,11 @@ public class ObjectRenderingItemForPlayer extends ObjectRendering {
 
     @Override
     public void render(Graphics2D graphics, int tileSize) {
-        float xPos = (float) (tileSize/2 * Math.sin(Math.toRadians(DisplayReference.mouse_controller.mouseRotationFromCenter)));
-        float yPos = (float) (tileSize/2 * Math.cos(Math.toRadians(DisplayReference.mouse_controller.mouseRotationFromCenter)));
+        double rot = DisplayReference.mouse_controller.mouseRotationFromCenter;
+        float xPos = (float) (tileSize/2 * Math.sin(Math.toRadians(rot)));
+        float yPos = (float) (tileSize/2 * Math.cos(Math.toRadians(rot)));
 
-        graphics.rotate(DisplayReference.mouse_controller.mouseRotationFromCenter, (DisplayReference.view.getWidth() >> 1), (DisplayReference.view.getHeight() >> 1));
+        graphics.rotate(rot, (DisplayReference.view.getWidth() >> 1), (DisplayReference.view.getHeight() >> 1));
 
         graphics.translate(((DisplayReference.view.getWidth() >> 1) - (tileSize >> 1))+xPos, ((DisplayReference.view.getHeight() >> 1) - (tileSize >> 1))+yPos);
 
@@ -31,7 +32,7 @@ public class ObjectRenderingItemForPlayer extends ObjectRendering {
 
         graphics.translate(-((DisplayReference.view.getWidth() >> 1) - (tileSize >> 1))-xPos, -((DisplayReference.view.getHeight() >> 1) - (tileSize >> 1))-yPos);
 
-        graphics.rotate(-DisplayReference.mouse_controller.mouseRotationFromCenter, (DisplayReference.view.getWidth() >> 1) , (DisplayReference.view.getHeight() >> 1));
+        graphics.rotate(-rot, (DisplayReference.view.getWidth() >> 1) , (DisplayReference.view.getHeight() >> 1));
     }
 
     public Texture getTexture() {

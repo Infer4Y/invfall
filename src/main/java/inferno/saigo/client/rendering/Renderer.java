@@ -86,6 +86,7 @@ public class Renderer {
     }
 
     public void addPool(int layer, ObjectRendering objectRendering) {
+        System.out.println(objectRendering);
         objectPoolRenderings.get(layer).add(new Pair<>(objectRendering.uuid, objectRendering));
     }
 }

@@ -23,10 +23,10 @@ public class EntityProjectile extends Entity{
     }
 
     @Override
-    public void onCollision(MapWorld world,EntityData target) {
+    public void onCollision(MapWorld world, EntityData target) {
         super.onCollision(world, target);
 
-        target.age += 100;
+        target.age += 1000;
     }
 
     public EntityProjectileData createProjectile(float x, float y, float motionX, float motionY, Entity entity){

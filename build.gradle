@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 group 'inferno'
-version '1.0.0-Test'
+version '1.0.001-Test'
 
 mainClassName = 'inferno.saigo.client.Main'
 

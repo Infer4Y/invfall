@@ -14,7 +14,8 @@ public class ObjectRenderingPlayer extends ObjectRendering {
 
     @Override
     public void render(Graphics2D graphics, int tileSize) {
-        graphics.rotate(DisplayReference.mouse_controller.mouseRotationFromCenter, (DisplayReference.view.getWidth() >> 1), (DisplayReference.view.getHeight() >> 1));
+        double rot = DisplayReference.mouse_controller.mouseRotationFromCenter;
+        graphics.rotate(rot, (DisplayReference.view.getWidth() >> 1), (DisplayReference.view.getHeight() >> 1));
 
         graphics.translate(((DisplayReference.view.getWidth() >> 1) - (tileSize >> 1)), ((DisplayReference.view.getHeight() >> 1) - (tileSize >> 1)));
 
@@ -22,6 +23,6 @@ public class ObjectRenderingPlayer extends ObjectRendering {
 
         graphics.translate(-((DisplayReference.view.getWidth() >> 1) - (tileSize >> 1)), -((DisplayReference.view.getHeight() >> 1) - (tileSize >> 1)));
 
-        graphics.rotate(-DisplayReference.mouse_controller.mouseRotationFromCenter, (DisplayReference.view.getWidth() >> 1) , (DisplayReference.view.getHeight() >> 1));
+        graphics.rotate(-rot, (DisplayReference.view.getWidth() >> 1) , (DisplayReference.view.getHeight() >> 1));
     }
 }

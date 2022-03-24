@@ -3,6 +3,7 @@ package inferno.saigo.common.tiles;
 import inferno.saigo.common.configuration.Settings;
 import inferno.saigo.common.items.Item;
 import inferno.saigo.common.items.ItemTile;
+import inferno.saigo.common.maps.MapWorld;
 
 public class Tile {
     private final String registry_name;
@@ -27,5 +28,8 @@ public class Tile {
     @Override
     public String toString() {
         return domain + ":tiles." + registry_name;
+    }
+
+    public void update(MapWorld world, TileData selfData) {
     }
 }

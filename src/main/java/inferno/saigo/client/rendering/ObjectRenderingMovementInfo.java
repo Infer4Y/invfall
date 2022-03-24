@@ -9,11 +9,17 @@ import java.awt.font.LineMetrics;
 
 public class ObjectRenderingMovementInfo extends ObjectRendering {
     private String[] text;
-    private int x, y;
+    private int x, y, width, height;
+    private Font font;
     public boolean shouldRender;
 
     public ObjectRenderingMovementInfo(int x, int y, String... text){
+        this(Fonts.AUDIO_WIDE, x, y, text);
+    }
+
+    public ObjectRenderingMovementInfo(Font font, int x, int y, String... text){
         this.text = text;
+        this.font = font;
         this.x = x;
         this.y = y;
     }
@@ -22,7 +28,7 @@ public class ObjectRenderingMovementInfo extends ObjectRendering {
     public void render(Graphics2D graphics, int tileSize) {
         if ( !shouldRender ) return;
 
-        graphics.setFont(Fonts.AUDIO_WIDE);
+        graphics.setFont(font);
 
         int row = 0;
 
@@ -34,7 +40,7 @@ public class ObjectRenderingMovementInfo extends ObjectRendering {
 
         for (String textile : text) {
 
-            textWidth = (int) Fonts.AUDIO_WIDE.getStringBounds(textile, context).getWidth();
+            textWidth = (int) font.getStringBounds(textile, context).getWidth();
             largestWidth = Math.max(largestWidth, textWidth);
 
             ln = Fonts.AUDIO_WIDE.getLineMetrics(textile, context);
@@ -50,7 +56,7 @@ public class ObjectRenderingMovementInfo extends ObjectRendering {
 
         for (String textile : text) {
 
-            ln = Fonts.AUDIO_WIDE.getLineMetrics(textile, context);
+            ln = font.getLineMetrics(textile, context);
 
             textHeight = (int) (ln.getAscent() + ln.getDescent());
 

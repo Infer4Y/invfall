@@ -51,8 +51,6 @@ public class KeyController implements KeyListener {
     }
 
     public void releaseAll(){
-        for(Key key : keyBindings.values()){
-            key.isDown = false;
-        }
+        keyBindings.values().forEach(key -> key.isDown = false);
     }
 }

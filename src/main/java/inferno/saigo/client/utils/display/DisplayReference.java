@@ -45,7 +45,7 @@ public class DisplayReference {
     public static BufferStrategy buffer_strategy = null;
 
     public static BufferedImage view;
-    public static int viewScale = 2;
+    public static float viewScale = 0.75f;
 
     public static GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static GraphicsConfiguration defaultConfiguration = localGraphicsEnvironment.getDefaultScreenDevice().getDefaultConfiguration();

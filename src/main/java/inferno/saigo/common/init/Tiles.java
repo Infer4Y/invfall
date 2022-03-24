@@ -1,6 +1,8 @@
 package inferno.saigo.common.init;
 
+import inferno.saigo.common.maps.MapWorld;
 import inferno.saigo.common.tiles.Tile;
+import inferno.saigo.common.tiles.TileData;
 
 import java.util.HashMap;
 
@@ -20,7 +22,13 @@ public class Tiles {
     public static final Tile PAINTING_ONE = new Tile("painting_one");
     public static final Tile PAINTING_TWO = new Tile("painting_two");
     public static final Tile PAINTING_THREE = new Tile("painting_three");
-    public static final Tile PLACEHOLDER = new Tile("placeholder");
+    public static final Tile PLACEHOLDER = new Tile("placeholder"){
+        @Override
+        public void update(MapWorld world, TileData selfData) {
+            super.update(world, selfData);
+
+        }
+    };
     public static final Tile PLANKS = new Tile("plank");
     public static final Tile RUBY_TILE = new Tile("ruby_tile");
     public static final Tile STONE = new Tile("stone");
